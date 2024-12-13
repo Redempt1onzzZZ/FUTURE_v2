@@ -15,3 +15,14 @@ Here is the overview of FUTURE:
 ![OVERVIEW](https://github.com/Redmept1on/FUTURE/blob/main/overview.png)
 
 We will provide our detailed implementation in the following weeks.
+
+## Citation
+Please cite our paper if you find it useful:
+```
+@article{li2024seeds,
+  title={The Seeds of the FUTURE Sprout from History: Fuzzing for Unveiling Vulnerabilities in Prospective Deep-Learning Libraries},
+  author={Li, Zhiyuan and Wu, Jingzheng and Ling, Xiang and Luo, Tianyue and Rui, Zhiqing and Wu, Yanjun},
+  journal={arXiv preprint arXiv:2412.01317},
+  year={2024}
+}
+```
