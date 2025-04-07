@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="/Volumes/rc20/punch/ayan2/mlx/pics/echarts.min.js"></script>
+  </head>
+  <body>
+    <div id="main" style="width: 700px; height: 700px;"></div>
+    <script type="text/javascript">
+      var myChart = echarts.init(document.getElementById('main'));
+
+      var option = {
+        color: ['#9192ab', '#7898e1', '#efa666', '#0e2c82', '#5470c6'],
+        legend: {
+          show: true,
+          orient: 'horizontal',
+          top: '3%',
+          left: 'center',
+          itemHeight: 20,
+          textStyle: {
+            fontSize: 25,
+            fontWeight: 'bold',
+          },
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow',
+          },
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            mark: { show: true },
+            saveAsImage: { show: true },
+            pixelRatio: 2,
+          },
+        },
+        dataset: {
+          source: [
+            ['category', 'Crash', 'CPU/GPU', 'Src libs/Tar libs'],
+            ['MLX', 6, 8, 21],
+            ['Mindspore', 0, 20, 10],
+            ['Oneflow', 34, 31, 18],
+            ['Total', 40, 59, 49],
+          ],
+        },
+        xAxis: {
+          type: 'category',
+          axisLabel: {
+            fontSize: 20,
+            fontWeight: 'bold',
+            margin: 10,
+          },
+        },
+        yAxis: {
+          type: 'value',
+          name: 'Counts',
+          nameLocation: 'middle',
+          nameTextStyle: {
+            fontSize: 25,
+            fontWeight: 'bold',
+          },
+          nameGap: 40,
+          axisLabel: {
+            fontSize: 25,
+            fontWeight: 'bold',
+          },
+        },
+        series: [
+          {
+            type: 'bar',
+            name: 'Crash',
+            stack: 'total',
+            barWidth: '50%',
+            encode: {
+              x: 'category',
+              y: 'Crash',
+            },
+          },
+          {
+            type: 'bar',
+            name: 'CPU/GPU',
+            stack: 'total',
+            barWidth: '50%',
+            encode: {
+              x: 'category',
+              y: 'CPU/GPU',
+            },
+          },
+          {
+            type: 'bar',
+            name: 'Src libs/Tar libs',
+            stack: 'total',
+            barWidth: '50%',
+            encode: {
+              x: 'category',
+              y: 'Src libs/Tar libs',
+            },
+          },
+        ],
+      };
+
+      myChart.setOption(option);
+    </script>
+  </body>
+</html>

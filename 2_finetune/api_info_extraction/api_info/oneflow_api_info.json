@@ -1,0 +1,2019 @@
+[
+  {
+    "name": "oneflow.numel",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the total number of elements in the input tensor.",
+    "parameters": [
+      "input (oneflow.Tensor) – Input Tensor"
+    ],
+    "returns": "the total number of elements in the input tensor.",
+    "return_type": "",
+    "examples": ""
+  },
+  {
+    "name": "oneflow.zeros",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a tensor filled with the scalar value 0, with the shape defined by the variable argument size.",
+    "parameters": [
+      "size (an integer or tuple of integer values) – a variable number of arguments or a collection like a list or tuple.",
+      "dtype (flow.dtype, optional) – the desired data type of returned tensor.",
+      "device (flow.device, optional) – the desired device of returned tensor. Default: if None, uses the current device for the default tensor type",
+      "placement (flow.placement, optional) – the desired placement of returned global tensor. Default: if None, the returned tensor is local one using the argument device.",
+      "sbp (flow.sbp.sbp or tuple of flow.sbp.sbp, optional) – the desired sbp descriptor of returned global tensor. Default: if None, the returned tensor is local one using the argument device.",
+      "requires_grad (bool, optional) – If autograd should record operations on the returned tensor. Default: False."
+    ],
+    "returns": "a tensor filled with the scalar value 0, with the shape defined by the variable argument size.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> y = flow.zeros(5)\n>>> y\ntensor([0., 0., 0., 0., 0.], dtype=oneflow.float32)\n>>> y = flow.zeros(2,3)\n>>> y\ntensor([[0., 0., 0.],\n        [0., 0., 0.]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.ones",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a tensor filled with the scalar value 1, with the shape defined by the variable argument size.",
+    "parameters": [
+      "size (an integer or tuple of integer values) – defining the shape of the output tensor. Can be a variable number of arguments or a collection like a list or tuple.",
+      "dtype (flow.dtype, optional) – the desired data type of returned tensor.",
+      "device (flow.device, optional) – the desired device of returned tensor. Default: if None, uses the current device for the default tensor type",
+      "placement (flow.placement, optional) – the desired placement of returned global tensor. Default: if None, the returned tensor is local one using the argument device.",
+      "sbp (flow.sbp.sbp or tuple of flow.sbp.sbp, optional) – the desired sbp descriptor of returned global tensor. Default: if None, the returned tensor is local one using the argument device.",
+      "requires_grad (bool, optional) – If autograd should record operations on the returned tensor. Default: False."
+    ],
+    "returns": "a tensor filled with the scalar value 1, with the shape defined by the variable argument size.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> y = flow.ones(5)\n>>> y\ntensor([1., 1., 1., 1., 1.], dtype=oneflow.float32)\n>>> y = flow.ones(2,3) # construct local tensor\n>>> y\ntensor([[1., 1., 1.],\n        [1., 1., 1.]], dtype=oneflow.float32)\n>>> placement = flow.placement(\"cpu\", ranks=[0])\n>>> y = flow.ones(4, 5, placement=placement, sbp=flow.sbp.broadcast) # construct global tensor\n>>> y.is_global\nTrue\n"
+  },
+  {
+    "name": "oneflow.ones_like",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API The interface is consistent with PyTorch. The documentation is referenced from: https://pytorch.org/docs/1.10/generated/torch.ones_like.html.",
+    "parameters": [
+      "input (Tensor) – The size of input will determine size of the output tensor.",
+      "dtype (flow.dtype, optional) – the desired type of returned tensor. Default: if None, same flow.dtype as this tensor.",
+      "device (flow.device, optional) – the desired device of returned tensor. Default: if None, same flow.device as this tensor.",
+      "placement (flow.placement, optional) – the desired placement of returned global tensor. Default: if None, the returned tensor is local one using the argument device.",
+      "sbp (flow.sbp.sbp or tuple of flow.sbp.sbp, optional) – the desired sbp descriptor of returned global tensor. Default: if None, the returned tensor is local one using the argument device.",
+      "requires_grad (bool, optional) – If autograd should record operations on the returned tensor. Default: False."
+    ],
+    "returns": "a tensor filled with the scalar value 1, with the same size as input. flow.ones_like(input) is equivalent to flow.ones(input.shape, dtype=input.dtype)",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> x = flow.tensor(np.random.rand(5), dtype=flow.float32)\n>>> y = flow.ones_like(x)\n>>> y\ntensor([1., 1., 1., 1., 1.], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.new_ones",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API The interface is consistent with PyTorch. The documentation is referenced from: https://pytorch.org/docs/1.10/generated/torch.Tensor.new_ones.html.",
+    "parameters": [
+      "size (int...) – a list, tuple, or flow.Size of integers defining the shape of the output tensor.",
+      "dtype (flow.dtype, optional) – the desired type of returned tensor. Default: if None, same flow.dtype as this tensor.",
+      "device (flow.device, optional) – the desired device of returned tensor. Default: if None, same flow.device as this tensor.",
+      "placement (flow.placement, optional) – the desired placement of returned global tensor. Default: if None, the returned tensor is local one using the argument device.",
+      "sbp (flow.sbp.sbp or tuple of flow.sbp.sbp, optional) – the desired sbp descriptor of returned global tensor. Default: if None, the returned tensor is local one using the argument device.",
+      "requires_grad (bool, optional) – If autograd should record operations on the returned tensor. Default: False."
+    ],
+    "returns": "a Tensor of size size filled with 1. By default, the returned Tensor has the same oneflow.dtype and oneflow.device as this tensor.",
+    "return_type": "",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> x = flow.Tensor(np.ones((1, 2, 3)))\n>>> y = x.new_ones((2, 2))\n>>> y\ntensor([[1., 1.],\n        [1., 1.]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.arange",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a 1-D tensor of size \\(\\left\\lfloor \\frac{\\text{end} - \\text{start}}{\\text{step}} \\right\\rfloor + 1\\) with values from start to end with step step. Step is the gap between two values in the tensor.",
+    "parameters": [
+      "start (int) – the starting value for the set of points. Default: 0.",
+      "end (int) – the ending value for the set of points",
+      "step (int) – the gap between each pair of adjacent points. Default: 1."
+    ],
+    "returns": "a 1-D tensor of size \\(\\left\\lfloor \\frac{\\text{end} - \\text{start}}{\\text{step}} \\right\\rfloor + 1\\) with values from start to end with step step. Step is the gap between two values in the tensor.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n\n>>> y = flow.arange(0, 5)\n>>> y\ntensor([0, 1, 2, 3, 4], dtype=oneflow.int64)\n"
+  },
+  {
+    "name": "oneflow.linspace",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Creates a one-dimensional tensor of size steps whose values are evenly spaced from start to end, inclusive. That is, the value are:",
+    "parameters": [
+      "start (float) – the starting value for the set of points",
+      "end (float) – the ending value for the set of points",
+      "steps (int) – size of the constructed tensor"
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n\n>>> y = flow.linspace(3, 10, steps=5)\n>>> y\ntensor([ 3.0000,  4.7500,  6.5000,  8.2500, 10.0000], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.eye",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This operator creates a 2-D Tensor with ones on the diagonal and zeros elsewhere.",
+    "parameters": [
+      "n (int) – the number of rows.",
+      "m (int, optional) – the number of colums with default being n. Defaults to None."
+    ],
+    "returns": "The result tensor with ones on the diagonal and zeros elsewhere.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> out = flow.eye(3, 3)\n>>> out\ntensor([[1., 0., 0.],\n        [0., 1., 0.],\n        [0., 0., 1.]], dtype=oneflow.float32)\n>>> out = flow.eye(3, 3, device=\"cuda\")\n>>> out\ntensor([[1., 0., 0.],\n        [0., 1., 0.],\n        [0., 0., 1.]], device='cuda:0', dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.full",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Creates a tensor of size size filled with fill_value. The tensor’s dtype is inferred from value.",
+    "parameters": [
+      "size (int...) – a list, tuple, or oneflow.Size of integers defining the shape of the output tensor.",
+      "fill_value (Scalar) – the value to fill the output tensor with.",
+      "dtype (oneflow.dtype, optional) – the desired data type of returned tensor.",
+      "device (oneflow.device, optional) – the desired device of returned tensor. Default: if None, uses the current device for the default tensor type",
+      "placement (oneflow.placement, optional) – the desired placement of returned global tensor. Default: if None, the returned tensor is local one using the argument device.",
+      "sbp (oneflow.sbp.sbp or tuple of oneflow.sbp.sbp, optional) – the desired sbp descriptor of returned global tensor. Default: if None, the returned tensor is local one using the argument device.",
+      "requires_grad (bool, optional) – If autograd should record operations on the returned tensor. Default: False."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> y = flow.full((5,),5)\n>>> y\ntensor([5, 5, 5, 5, 5], dtype=oneflow.int64)\n>>> y = flow.full((2,3),5.0) # construct local tensor\n>>> y\ntensor([[5., 5., 5.],\n        [5., 5., 5.]], dtype=oneflow.float32)\n>>> placement = flow.placement(\"cpu\", ranks=[0])\n>>> y = flow.full((2,3), 5.0, placement=placement, sbp=flow.sbp.broadcast)  # construct global tensor\n>>> y.is_global\nTrue\n"
+  },
+  {
+    "name": "oneflow.full_like",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a tensor with the same size as input filled with fill_value. oneflow.full_like(input, fill_value) is equivalent to oneflow.full(input.size(), fill_value, dtype=input.dtype, device=input.device).",
+    "parameters": [
+      "input (oneflow.Tensor) –",
+      "fill_value (Scalar) – the value to fill the output tensor with.",
+      "dtype (oneflow.dtype, optional) – the desired data type of returned tensor.",
+      "device (oneflow.device, optional) – the desired device of returned tensor. Default: if None, uses the current device for the default tensor type",
+      "placement (oneflow.placement, optional) – the desired placement of returned global tensor. Default: if None, the returned tensor is local one using the argument device.",
+      "sbp (oneflow.sbp.sbp or tuple of oneflow.sbp.sbp, optional) – the desired sbp descriptor of returned global tensor. Default: if None, the returned tensor is local one using the argument device.",
+      "requires_grad (bool, optional) – If autograd should record operations on the returned tensor. Default: False."
+    ],
+    "returns": "a tensor with the same size as input filled with fill_value. oneflow.full_like(input, fill_value) is equivalent to oneflow.full(input.size(), fill_value, dtype=input.dtype, device=input.device).",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> x = flow.randn(2, 3)\n>>> y = flow.full_like(x, 2.0)\n>>> y\ntensor([[2., 2., 2.],\n        [2., 2., 2.]], dtype=oneflow.float32)\n>>> y = flow.full_like(x, 2, dtype=flow.int32)\n>>> y\ntensor([[2, 2, 2],\n        [2, 2, 2]], dtype=oneflow.int32)\n>>> placement = flow.placement(\"cpu\", ranks=[0])\n>>> y = flow.full_like(x, 5.0, placement=placement, sbp=flow.sbp.broadcast)  # construct global tensor\n>>> y.is_global\nTrue\n"
+  },
+  {
+    "name": "oneflow.logspace",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This function is equivalent to PyTorch’s logspace function. The documentation is referenced from: https://pytorch.org/docs/1.10/generated/torch.logspace.html.",
+    "parameters": [
+      "start (float) – the starting value for the set of points",
+      "end (float) – the ending value for the set of points",
+      "steps (int) – size of the constructed tensor",
+      "base (float, optional) – base of the logarithm function. Default: 10.0."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> flow.logspace(start=-10, end=10, steps=2)\ntensor([1.0000e-10, 1.0000e+10], dtype=oneflow.float32)\n>>> flow.logspace(start=0.1, end=1.0, steps=5)\ntensor([ 1.2589,  2.1135,  3.5481,  5.9566, 10.0000], dtype=oneflow.float32)\n>>> flow.logspace(start=0.1, end=1.0, steps=1)\ntensor([1.2589], dtype=oneflow.float32)\n>>> flow.logspace(start=2, end=2, steps=1, base=2)\ntensor([4.], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.argwhere",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This operator finds the indices of input Tensor input elements that are non-zero.",
+    "parameters": [
+      "input (oneflow.Tensor) – the input Tensor.",
+      "dtype (Optional[flow.dtype], optional) – The data type of output. Defaults to None."
+    ],
+    "returns": "The result Tensor.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n>>> x = np.array([[0, 1, 0],\n...            [2, 0, 2]]).astype(np.float32)\n\n>>> input = flow.Tensor(x)\n>>> output = flow.argwhere(input)\n>>> output\ntensor([[0, 1],\n        [1, 0],\n        [1, 2]], dtype=oneflow.int32)\n"
+  },
+  {
+    "name": "oneflow.cat",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Concatenate two or more Tensor s at specified dim.",
+    "parameters": [
+      "inputs – a list of Tensor",
+      "dim – a int."
+    ],
+    "returns": "A Tensor",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> input1 = flow.tensor(np.random.randn(2, 6, 5, 3), dtype=flow.float32)\n>>> input2 = flow.tensor(np.random.randn(2, 6, 5, 3), dtype=flow.float32)\n>>> input3 = flow.tensor(np.random.randn(2, 6, 5, 3), dtype=flow.float32)\n\n>>> out = flow.cat([input1, input2, input3], dim=1) # equal to using flow.concat()\n>>> out.shape\noneflow.Size([2, 18, 5, 3])\n"
+  },
+  {
+    "name": "oneflow.column_stack",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Creates a new tensor by horizontally stacking the tensors in tensors.",
+    "parameters": [
+      "tensors – (List[oneflow.Tensor]): sequence of tensors to stack"
+    ],
+    "returns": "A Tensor",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> x1 = flow.randn(5)\n>>> x2 = flow.randn(5)\n>>> flow.column_stack([x1, x2]).shape\noneflow.Size([5, 2])\n>>> x1 = flow.randn(2, 5)\n>>> x2 = flow.randn(2, 2)\n>>> flow.column_stack([x1, x2]).shape\noneflow.Size([2, 7])\n"
+  },
+  {
+    "name": "oneflow.concat",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API cat(tensors, dim=0) -> Tensor",
+    "parameters": [
+      "inputs – a list of Tensor",
+      "dim – a int."
+    ],
+    "returns": "A Tensor",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> input1 = flow.tensor(np.random.randn(2, 6, 5, 3), dtype=flow.float32)\n>>> input2 = flow.tensor(np.random.randn(2, 6, 5, 3), dtype=flow.float32)\n>>> input3 = flow.tensor(np.random.randn(2, 6, 5, 3), dtype=flow.float32)\n\n>>> out = flow.cat([input1, input2, input3], dim=1) # equal to using flow.concat()\n>>> out.shape\noneflow.Size([2, 18, 5, 3])\n"
+  },
+  {
+    "name": "oneflow.chunk",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Splits a tensor into a specific number of chunks. Each chunk is a view of the input tensor. Last chunk will be bigger if the tensor size along the given dimension dim is not divisible by chunks.",
+    "parameters": [
+      "input (oneflow.Tensor) – The tensor to split.",
+      "chunks (int) – Number of chunks to return.",
+      "dim (int) – Dimension along which to split the tensor."
+    ],
+    "returns": "List of Tensors.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> arr = np.random.randn(5, 3, 6, 9).astype(np.float32)\n>>> input = flow.tensor(arr)\n>>> output = []\n>>> chunks = 3\n>>> output = flow.chunk(input, chunks=chunks, dim=2)\n>>> out_shape = []\n>>> for i in range(0, chunks):\n...     out_shape.append(output[i].numpy().shape)\n>>> out_shape\n[(5, 3, 2, 9), (5, 3, 2, 9), (5, 3, 2, 9)]\n"
+  },
+  {
+    "name": "oneflow.dstack",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Stack tensors in tensors depthwish (along third axis).",
+    "parameters": [
+      "tensors – (List[oneflow.Tensor]): sequence of tensors to stack"
+    ],
+    "returns": "A Tensor",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> x1 = flow.randn(2, 3, 4)\n>>> x2 = flow.randn(2, 3, 2)\n>>> flow.dstack([x1, x2]).shape\noneflow.Size([2, 3, 6])\n>>> x = flow.randn(6, 4)\n>>> flow.dstack([x, x]).shape\noneflow.Size([6, 4, 2])\n"
+  },
+  {
+    "name": "oneflow.expand",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This operator expand the input tensor to a larger size.",
+    "parameters": [
+      "input (oneflow.Tensor) – the input Tensor.",
+      "*sizes (oneflow.Size or int) – The desired expanded size."
+    ],
+    "returns": "The result Tensor.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> x = np.array([[[[0, 1]],\n...               [[2, 3]],\n...               [[4, 5]]]]).astype(np.int32)\n>>> input = flow.Tensor(x)\n>>> input.shape\noneflow.Size([1, 3, 1, 2])\n>>> out = input.expand(1, 3, 2, 2)\n>>> out.shape\noneflow.Size([1, 3, 2, 2])\n"
+  },
+  {
+    "name": "oneflow.batch_gather",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Gather the element in batch dims.",
+    "parameters": [
+      "in (Tensor) – the input tensor.",
+      "indices (Tensor) – the indices tensor, its dtype must be int32/64."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> x = flow.Tensor(np.array([[1, 2, 3],\n...                           [4, 5, 6]]))\n>>> indices = flow.tensor(np.array([1, 0]).astype(np.int64))\n>>> out = flow.batch_gather(x, indices)\n\ntensor([[4., 5., 6.],\n        [1., 2., 3.]], dtype=oneflow.float32)\n\n>>> import oneflow as flow\n>>> import numpy as np\n\n>>> x = flow.Tensor(np.array([[[1, 2, 3], [4, 5, 6]],\n...                           [[1, 2, 3], [4, 5, 6]]]))\n>>> indices = flow.tensor(np.array([[1, 0],\n...                                 [0, 1]]).astype(np.int64))\n>>> out = flow.batch_gather(x, indices)\n\ntensor([[[4., 5., 6.],\n         [1., 2., 3.]],\n        [[1., 2., 3.],\n         [4., 5., 6.]]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.hsplit",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API The documentation is referenced from: https://pytorch.org/docs/1.10/generated/torch.hsplit.html.",
+    "parameters": [
+      "input (Tensor) – the input tensor.",
+      "indices_or_sections (int or a list) – See argument in oneflow.tensor_split()."
+    ],
+    "returns": "the output TensorTuple.",
+    "return_type": "oneflow.TensorTuple",
+    "examples": ">>> import oneflow as flow\n\n>>> input = flow.rand(3,4,5,6)\n>>> output = flow.hsplit(input,(1,3))\n>>> output[0].size()\noneflow.Size([3, 1, 5, 6])\n>>> output[1].size()\noneflow.Size([3, 2, 5, 6])\n>>> output[2].size()\noneflow.Size([3, 1, 5, 6])\n"
+  },
+  {
+    "name": "oneflow.hstack",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Stack tensors in tensors horizontally (column wise).",
+    "parameters": [
+      "tensors – (List[oneflow.Tensor]): sequence of tensors to stack"
+    ],
+    "returns": "A Tensor",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> x1 = flow.randn(5, 2)\n>>> x2 = flow.randn(5, 3)\n>>> flow.hstack([x1, x2]).shape\noneflow.Size([5, 5])\n>>> x = flow.randn(5)\n>>> flow.hstack([x, x]).shape\noneflow.Size([10])\n"
+  },
+  {
+    "name": "oneflow.vsplit",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Splits input, a tensor with two or more dimensions, into multiple tensors vertically according to indices_or_sections. Each split is a view of input. This is equivalent to calling oneflow.tensor_split(input, indices_or_sections, dim=0) (the split dimension is 0), except that if indices_or_sections is an integer it must evenly divide the split dimension or a runtime error will be thrown. The documentation is referenced from: https://pytorch.org/docs/1.10/generated/torch.vsplit.html.",
+    "parameters": [
+      "input (Tensor) – the input tensor.",
+      "indices_or_sections (int or a list) – If indices_or_sections is an integer n , input is split into n sections along dimension dim.If input is divisible by n along dimension dim, each section will be of equal size, input.size (dim) / n. If input is not divisible by n, the sizes of the first int(input.size(dim) % n). sections will have size int(input.size(dim) / n) + 1, and the rest will have size int(input.size(dim) / n). If indices_or_sections is a list or tuple of ints, then input is split along dimension dim at each of the indices in the list, tuple or tensor. For instance, indices_or_sections=[2, 3] and dim=0 would result in the tensors input[:2], input[2:3], and input[3:].If indices_or_sections is a tensor, it must be a zero-dimensional or one-dimensional long tensor on the CPU."
+    ],
+    "returns": "the output TensorTuple.",
+    "return_type": "oneflow.TensorTuple",
+    "examples": ">>> import oneflow as flow\n\n>>> input = flow.rand(4, 4, 5, 6)\n>>> output = flow.vsplit(input, (1, 3))\n>>> output[0].size()\noneflow.Size([1, 4, 5, 6])\n>>> output[1].size()\noneflow.Size([2, 4, 5, 6])\n>>> output[2].size()\noneflow.Size([1, 4, 5, 6])\n"
+  },
+  {
+    "name": "oneflow.vstack",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Stack tensors in tensors vertically (row wise).",
+    "parameters": [
+      "tensors – (List[oneflow.Tensor]): sequence of tensors to stack"
+    ],
+    "returns": "A Tensor",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> x1 = flow.randn(2, 5)\n>>> x2 = flow.randn(3, 5)\n>>> flow.vstack([x1, x2]).shape\noneflow.Size([5, 5])\n>>> x = flow.randn(5)\n>>> flow.vstack([x, x]).shape\noneflow.Size([2, 5])\n"
+  },
+  {
+    "name": "oneflow.movedim",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Moves the dimension(s) of input at the position(s) in source to the position(s) in destination. Other dimensions of input that are not explicitly moved remain in their original order and appear at the positions not specified in destination. The documentation is referenced from: https://pytorch.org/docs/1.10/generated/torch.movedim.html.",
+    "parameters": [
+      "input (Tensor) – the input tensor.",
+      "source (int or a list) – Original positions of the dims to move. These must be unique.",
+      "destination (int or a list) – Destination positions for each of the original dims. These must also be unique."
+    ],
+    "returns": "the output Tensor.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> input = flow.tensor(np.random.randn(2, 3, 4, 5), dtype=flow.float32)\n>>> output = flow.movedim(input, 1, 0)\n>>> output.shape\noneflow.Size([3, 2, 4, 5])\n>>> output = flow.movedim(input, (1, 2), (0, 1))\n>>> output.shape\noneflow.Size([3, 4, 2, 5])\n"
+  },
+  {
+    "name": "oneflow.narrow",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor that is a narrowed version of input tensor. The dimension dim is input from start to start + length.",
+    "parameters": [
+      "input – the tensor to narrow.",
+      "dim – the dimension along which to narrow.",
+      "start – the starting dimension.",
+      "length – the distance to the ending dimension."
+    ],
+    "returns": "a new tensor that is a narrowed version of input tensor. The dimension dim is input from start to start + length.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> input = flow.tensor([[1, 2, 3], [4, 5, 6], [7, 8, 9]])\n>>> flow.narrow(input, 0, 0, 2)\ntensor([[1, 2, 3],\n        [4, 5, 6]], dtype=oneflow.int64)\n>>> flow.narrow(input, 1, 1, 2)\ntensor([[2, 3],\n        [5, 6],\n        [8, 9]], dtype=oneflow.int64)\n"
+  },
+  {
+    "name": "oneflow.permute",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a view of the original tensor with its dimensions permuted.",
+    "parameters": [
+      "dims (tuple of ints) – The desired ordering of dimensions"
+    ],
+    "returns": "a view of the original tensor with its dimensions permuted.",
+    "return_type": "",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> input = flow.tensor(np.random.randn(2, 6, 5, 3), dtype=flow.float32)\n>>> output = flow.permute(input, (1, 0, 2, 3)).shape\n>>> output\noneflow.Size([6, 2, 5, 3])\n"
+  },
+  {
+    "name": "oneflow.repeat",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This operator repeat the input tensor to a larger size along the specified dimensions.",
+    "parameters": [
+      "input (oneflow.Tensor) – the input Tensor.",
+      "sizes (flow.Shape or List) – The number of times to repeat this tensor along each dimension."
+    ],
+    "returns": "The result Tensor.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> np_arr = np.random.randn(5, 3, 6, 9).astype(np.float32)\n>>> input = flow.Tensor(np_arr)\n>>> out = input.repeat(1, 1, 2, 2)\n>>> out.shape\noneflow.Size([5, 3, 12, 18])\n>>> out = input.repeat(2, 1, 1, 2, 2)\n>>> out.shape\noneflow.Size([2, 5, 3, 12, 18])\n"
+  },
+  {
+    "name": "oneflow.reshape",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This operator reshapes a Tensor.",
+    "parameters": [
+      "x – A Tensor.",
+      "shape – Shape of the output tensor."
+    ],
+    "returns": "A Tensor has the same type as x.",
+    "return_type": "",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n>>> x = np.array(\n...    [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]\n... ).astype(np.float32)\n>>> input = flow.Tensor(x)\n\n>>> y = flow.reshape(input, shape=[2, 2, 2, -1]).shape\n>>> y\noneflow.Size([2, 2, 2, 2])\n"
+  },
+  {
+    "name": "oneflow.select",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Slices the self tensor along the selected dimension at the given index. This function returns a view of the original tensor with the given dimension removed.",
+    "parameters": [
+      "input (Tensor) – the input tensor.",
+      "dim (int) – the dimension to slice.",
+      "select (int) – the index to select with."
+    ],
+    "returns": "the output Tensor.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> input = flow.rand(3, 4, 5)\n>>> out = flow.select(input, 0, 1)\n>>> out.size()\noneflow.Size([4, 5])\n>>> out = flow.select(input, 1, 1)\n>>> out.size()\noneflow.Size([3, 5])\n"
+  },
+  {
+    "name": "oneflow.slice",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Extracts a slice from a tensor. The slice_tup_list assigns the slice indices in each dimension, the format is (start, stop, step). The operator will slice the tensor according to the slice_tup_list.",
+    "parameters": [
+      "input – A Tensor.",
+      "slice_tup_list – A list of slice tuple, indicate each dimension slice (start, stop, step)."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n>>> input = flow.Tensor(np.random.randn(3, 6, 9).astype(np.float32))\n>>> tup_list = [[None, None, None], [0, 5, 2], [0, 6, 3]]\n>>> y = flow.slice(input, slice_tup_list=tup_list)\n>>> y.shape\noneflow.Size([3, 3, 2])\n"
+  },
+  {
+    "name": "oneflow.split",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Splits the tensor into chunks.",
+    "parameters": [
+      "x – tensor to split.",
+      "split_size_or_sections – size of a single chunk or list of sizes for each chunk.",
+      "dim – dimension along which to split the tensor."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> a = flow.arange(10).view(5, 2)\n>>> flow.split(a, 2)\n(tensor([[0, 1],\n        [2, 3]], dtype=oneflow.int64), tensor([[4, 5],\n        [6, 7]], dtype=oneflow.int64), tensor([[8, 9]], dtype=oneflow.int64))\n>>> flow.split(a, [1, 4])\n(tensor([[0, 1]], dtype=oneflow.int64), tensor([[2, 3],\n        [4, 5],\n        [6, 7],\n        [8, 9]], dtype=oneflow.int64))\n"
+  },
+  {
+    "name": "oneflow.squeeze",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This operator removes the specified dimention which size is 1 of the input Tensor. If the dim is not specified, this operator will remove all the dimention which size is 1 of the input Tensor.",
+    "parameters": [
+      "input (oneflow.Tensor) – the input Tensor.",
+      "dim (int, optinal) – Defaults to None, if given, the input will be squeezed only in this dimension."
+    ],
+    "returns": "The result Tensor.",
+    "return_type": "Tensor",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> input = flow.tensor(np.array([[[[1, 1, 1]]]]).astype(np.int32))\n>>> input.shape\noneflow.Size([1, 1, 1, 3])\n>>> out = flow.squeeze(input, dim=[1, 2]).shape\n>>> out\noneflow.Size([1, 3])\n"
+  },
+  {
+    "name": "oneflow.swapaxes",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This function is equivalent to NumPy’s swapaxes function.",
+    "parameters": [],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n\n>>> x = flow.tensor([[[0,1],[2,3]],[[4,5],[6,7]]])\n>>> x.shape\noneflow.Size([2, 2, 2])\n>>> flow.swapaxes(x, 0, 1).shape\noneflow.Size([2, 2, 2])\n>>> flow.swapaxes(x, 0, 2).shape\noneflow.Size([2, 2, 2])\n"
+  },
+  {
+    "name": "oneflow.swapdims",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This function is equivalent to torch’s swapdims function.",
+    "parameters": [],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n\n>>> x = flow.tensor([[[0,1],[2,3]],[[4,5],[6,7]]])\n>>> x\ntensor([[[0, 1],\n         [2, 3]],\n\n        [[4, 5],\n         [6, 7]]], dtype=oneflow.int64)\n>>> flow.swapdims(x, 0, 1)\ntensor([[[0, 1],\n         [4, 5]],\n\n        [[2, 3],\n         [6, 7]]], dtype=oneflow.int64)\n>>> flow.swapdims(x, 0, 2)\ntensor([[[0, 4],\n         [2, 6]],\n\n        [[1, 5],\n         [3, 7]]], dtype=oneflow.int64)\n"
+  },
+  {
+    "name": "oneflow.t",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API oneflow.t(input) → Tensor.",
+    "parameters": [
+      "input (oneflow.Tensor) – An input tensor."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> x = flow.tensor(np.random.randn(), dtype=flow.float32)\n>>> flow.t(x).shape\noneflow.Size([])\n>>> x = flow.tensor(np.random.randn(3), dtype=flow.float32)\n>>> flow.t(x).shape\noneflow.Size([3])\n>>> x = flow.tensor(np.random.randn(2,3), dtype=flow.float32)\n>>> flow.t(x).shape\noneflow.Size([3, 2])\n"
+  },
+  {
+    "name": "oneflow.tile",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Constructs a tensor by repeating the elements of input. The dims argument specifies the number of repetitions in each dimension.",
+    "parameters": [
+      "input (oneflow.Tensor) – the tensor whose elements to repeat.",
+      "dims (tuple) – the number of repetitions per dimension."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> np_arr = np.random.randn(5, 3, 6, 9).astype(np.float32)\n>>> input = flow.Tensor(np_arr)\n>>> out = input.tile(2,1,2,1)\n>>> out.shape\noneflow.Size([10, 3, 12, 9])\n>>> x = np.random.randn(5, 2, 1)\n>>> input = flow.Tensor(x)\n>>> out = input.tile(3,4)\n>>> out.shape\noneflow.Size([5, 6, 4])\n"
+  },
+  {
+    "name": "oneflow.transpose",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a tensor that is a transposed version of input. The given dimensions dim0 and dim1 are swapped.",
+    "parameters": [
+      "input (oneflow.Tensor) – the input tensor.",
+      "dim0 (int) – the first dimension to be transposed.",
+      "dim1 (int) – the second dimension to be transposed."
+    ],
+    "returns": "A transposed tensor.",
+    "return_type": "Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n>>> input = flow.tensor(np.random.randn(2, 6, 5, 3), dtype=flow.float32)\n>>> out = flow.transpose(input, 0, 1).shape\n>>> out\noneflow.Size([6, 2, 5, 3])\n"
+  },
+  {
+    "name": "oneflow.unbind",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Removes a tensor dimension.",
+    "parameters": [
+      "x (Tensor) – the tensor to unbind",
+      "dim (int) – dimension to remove"
+    ],
+    "returns": "a tuple of all slices along a given dimension, already without it.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n\n>>> x = flow.tensor(range(12)).reshape([3,4])\n>>> flow.unbind(x)\n(tensor([0, 1, 2, 3], dtype=oneflow.int64), tensor([4, 5, 6, 7], dtype=oneflow.int64), tensor([ 8,  9, 10, 11], dtype=oneflow.int64))\n>>> flow.unbind(x, 1)\n(tensor([0, 4, 8], dtype=oneflow.int64), tensor([1, 5, 9], dtype=oneflow.int64), tensor([ 2,  6, 10], dtype=oneflow.int64), tensor([ 3,  7, 11], dtype=oneflow.int64))\n"
+  },
+  {
+    "name": "oneflow.unsqueeze",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with a dimension of size one inserted at the specified position.",
+    "parameters": [
+      "input (Tensor) – the input tensor.",
+      "dim (int) – the index at which to insert the singleton dimension"
+    ],
+    "returns": "a new tensor with a dimension of size one inserted at the specified position.",
+    "return_type": "",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> x = flow.randn(2, 3, 4)\n>>> y = x.unsqueeze(2)\n>>> y.shape\noneflow.Size([2, 3, 1, 4])\n"
+  },
+  {
+    "name": "oneflow.where",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Return a tensor of elements selected from either x or y, depending on condition. If the element in condition is larger than 0,",
+    "parameters": [
+      "condition (IntTensor) – When 1 (nonzero), yield x, otherwise yield y",
+      "x (Tensor or Scalar) – value (if :attr:x is a scalar) or values selected at indices where condition is True",
+      "y (Tensor or Scalar) – value (if :attr:x is a scalar) or values selected at indices where condition is False"
+    ],
+    "returns": "A tensor of shape equal to the broadcasted shape of condition, x, y",
+    "return_type": "Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n>>> x = flow.tensor(\n...    np.array([[-0.4620, 0.3139], [0.3898, -0.7197], [0.0478, -0.1657]]),\n...    dtype=flow.float32,\n... )\n>>> y = flow.tensor(np.ones(shape=(3, 2)), dtype=flow.float32)\n>>> condition = flow.tensor(np.array([[0, 1], [1, 0], [1, 0]]), dtype=flow.int32)\n>>> out = condition.where(x, y)\n>>> out \ntensor([[1.0000, 0.3139],\n        ...\n        [0.0478, 1.0000]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.tensor_split",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Splits a tensor into multiple sub-tensors, all of which are views of input, along dimension dim according to the indices or number of sections specified by indices_or_sections . The documentation is referenced from: https://pytorch.org/docs/1.10/generated/torch.tensor_split.html.",
+    "parameters": [
+      "input (Tensor) – the input tensor.",
+      "indices_or_sections (int or a list) – If indices_or_sections is an integer n , input is split into n sections along dimension dim.If input is divisible by n along dimension dim, each section will be of equal size, input.size (dim) / n. If input is not divisible by n, the sizes of the first int(input.size(dim) % n). sections will have size int(input.size(dim) / n) + 1, and the rest will have size int(input.size(dim) / n). If indices_or_sections is a list or tuple of ints, then input is split along dimension dim at each of the indices in the list, tuple or tensor. For instance, indices_or_sections=[2, 3] and dim=0 would result in the tensors input[:2], input[2:3], and input[3:].If indices_or_sections is a tensor, it must be a zero-dimensional or one-dimensional long tensor on the CPU.",
+      "dim (int) – dimension along which to split the tensor."
+    ],
+    "returns": "the output TensorTuple.",
+    "return_type": "oneflow.TensorTuple",
+    "examples": ">>> import oneflow as flow\n\n>>> input = flow.rand(3,4,5)\n>>> output = flow.tensor_split(input,(2,3),2)\n>>> output[0].size()\noneflow.Size([3, 4, 2])\n>>> output[1].size()\noneflow.Size([3, 4, 1])\n>>> output[2].size()\noneflow.Size([3, 4, 2])\n"
+  },
+  {
+    "name": "oneflow.bernoulli",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This operator returns a Tensor with binaray random numbers (0 / 1) from a Bernoulli distribution.",
+    "parameters": [
+      "input (Tensor) – the input tensor of probability values for the Bernoulli distribution",
+      "p (float, optional) – the probability for the Bernoulli distribution. If specified, Bernoulli distribution will use p for sampling, not input",
+      "generator (Generator, optional) – a pseudorandom number generator for sampling",
+      "out (Tensor, optional) – the output tensor."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> arr = np.array(\n...    [\n...        [1.0, 1.0, 1.0],\n...        [1.0, 1.0, 1.0],\n...        [1.0, 1.0, 1.0],\n...    ]\n... )\n>>> x = flow.tensor(arr, dtype=flow.float32)\n>>> y = flow.bernoulli(x)\n>>> y\ntensor([[1., 1., 1.],\n        [1., 1., 1.],\n        [1., 1., 1.]], dtype=oneflow.float32)\n>>> y = flow.bernoulli(x, 1)\n>>> y\ntensor([[1., 1., 1.],\n        [1., 1., 1.],\n        [1., 1., 1.]], dtype=oneflow.float32)\n>>> y = flow.bernoulli(x, p=0)\n>>> y\ntensor([[0., 0., 0.],\n        [0., 0., 0.],\n        [0., 0., 0.]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.normal",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a tensor of random numbers drawn from separate normal distributions whose mean and standard deviation are given.",
+    "parameters": [
+      "mean (Tensor) – the tensor of per-element means",
+      "std (Tensor) – the tensor of per-element standard deviations"
+    ],
+    "returns": "a tensor of random numbers drawn from separate normal distributions whose mean and standard deviation are given.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> generator = flow.Generator()\n>>> generator.manual_seed(0) \n<oneflow._oneflow_internal.Generator object at ...>\n>>> z = flow.normal(mean=flow.arange(1., 11.), std=flow.arange(1, 0, -0.1), generator=generator)\n>>> z[:5]\ntensor([3.2122, 3.0468, 3.6192, 4.3387, 5.6261], dtype=oneflow.float32)\n\n>>> import oneflow as flow\n>>> flow.normal(mean=0.5, std=flow.arange(1., 6.)).shape\noneflow.Size([5])\n\n>>> import oneflow as flow\n>>> flow.normal(mean=flow.arange(1., 6.)).shape\noneflow.Size([5])\n\n>>> import oneflow as flow\n>>> generator = flow.Generator()\n>>> generator.manual_seed(0) \n<oneflow._oneflow_internal.Generator object at ...>\n>>> y = flow.normal(0, 1, 5, generator=generator)\n>>> y\ntensor([2.2122, 1.1631, 0.7740, 0.4838, 1.0434], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.rand",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a tensor filled with random numbers from a uniform distribution on the interval [0, 1)",
+    "parameters": [
+      "size (int... or oneflow.Size) – Defining the shape of the output tensor. Can be a variable number of arguments or a collection like a list or tuple or oneflow.Size.",
+      "dtype (flow.dtype, optional) – The desired data type of returned tensor. Default: flow.float32.",
+      "generator (flow.Generator, optional) – a pseudorandom number generator for sampling",
+      "device (flow.device, optional) – The desired device of returned local tensor. If None, uses the current device.",
+      "placement (flow.placement, optional) – The desired device of returned global tensor. If None, will construct local tensor.",
+      "sbp (flow.sbp, optional) – The desired sbp of returned global tensor. It must be equal with the numbers of placement.",
+      "requires_grad (bool, optional) – If autograd should record operations on the returned tensor. Default: False."
+    ],
+    "returns": "a tensor filled with random numbers from a uniform distribution on the interval [0, 1)",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> x = flow.rand(3,3) # construct local tensor\n>>> x.shape\noneflow.Size([3, 3])\n>>> x.is_global\nFalse\n>>> placement = flow.placement(\"cpu\", ranks=[0])\n>>> sbp = flow.sbp.broadcast\n>>> x = flow.rand(3, 3, placement=placement, sbp=sbp) # construct global tensor\n>>> x.is_global\nTrue\n"
+  },
+  {
+    "name": "oneflow.randint",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a tensor filled with random integers generated uniformly between low (inclusive) and high (exclusive).",
+    "parameters": [
+      "low (int, optional) – Lowest integer to be drawn from the distribution. Default: 0.",
+      "high (int) – One above the highest integer to be drawn from the distribution.",
+      "size (tuple or oneflow.Size) – Defining the shape of the output tensor. Can be a variable number of arguments or a collection like a list or tuple or oneflow.Size."
+    ],
+    "returns": "a tensor filled with random integers generated uniformly between low (inclusive) and high (exclusive).",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> generator = flow.Generator()\n>>> generator.manual_seed(0) \n<oneflow._oneflow_internal.Generator object at ...>\n>>> y = flow.randint(0, 5, (3,3), generator=generator) # construct local tensor\n>>> y\ntensor([[2, 2, 3],\n        [4, 3, 4],\n        [2, 4, 2]], dtype=oneflow.int64)\n>>> y.is_global\nFalse\n>>> placement = flow.placement(\"cpu\", ranks=[0])\n>>> y = flow.randint(0, 5, (3,3), generator=generator, placement=placement, sbp=flow.sbp.broadcast) # construct global tensor\n>>> y.is_global\nTrue\n"
+  },
+  {
+    "name": "oneflow.randn",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a tensor filled with random numbers from a normal distribution with mean 0 and variance 1 (also called the standard normal distribution).",
+    "parameters": [
+      "size (int... or oneflow.Size) – Defining the shape of the output tensor. Can be a variable number of arguments or a collection like a list or tuple or oneflow.Size.",
+      "dtype (flow.dtype, optional) – The desired data type of returned tensor. Default: flow.float32.",
+      "generator (flow.Generator, optional) – a pseudorandom number generator for sampling",
+      "device (flow.device, optional) – The desired device of returned local tensor. If None, uses the current device.",
+      "placement (flow.placement, optional) – The desired device of returned global tensor. If None, will construct local tensor.",
+      "sbp (flow.sbp, optional) – The desired sbp of returned global tensor. It must be equal with the numbers of placement.",
+      "requires_grad (bool, optional) – If autograd should record operations on the returned tensor. Default: False."
+    ],
+    "returns": "a tensor filled with random numbers from a normal distribution with mean 0 and variance 1 (also called the standard normal distribution).",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> x = flow.randn(3,3) # construct local tensor\n>>> x.shape\noneflow.Size([3, 3])\n>>> x.is_global\nFalse\n>>> placement = flow.placement(\"cpu\", ranks=[0])\n>>> sbp = flow.sbp.broadcast\n>>> x = flow.randn(3,3,placement=placement,sbp=sbp) # construct global tensor\n>>> x.is_global\nTrue\n"
+  },
+  {
+    "name": "oneflow.randperm",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a random permutation of integers from 0 to n - 1.",
+    "parameters": [
+      "n (int) – the upper bound (exclusive)"
+    ],
+    "returns": "a random permutation of integers from 0 to n - 1.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> generator = flow.Generator()\n>>> generator.manual_seed(0) \n<oneflow._oneflow_internal.Generator object at ...>\n>>> y = flow.randperm(5, generator=generator) # construct local tensor\n>>> y\ntensor([2, 4, 3, 0, 1], dtype=oneflow.int64)\n>>> y.is_global\nFalse\n>>> placement = flow.placement(\"cpu\", ranks=[0])\n>>> y = flow.randperm(5, generator=generator, placement=placement, sbp=flow.sbp.broadcast) # construct global tensor\n>>> y.is_global\nTrue\n"
+  },
+  {
+    "name": "oneflow.multinomial",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a tensor where each row contains num_samples indices sampled from the multinomial probability distribution located in the corresponding row of tensor input.",
+    "parameters": [
+      "input (Tensor) – the input tensor containing probabilities",
+      "num_samples (int) – number of samples to draw",
+      "replacement (bool, optional) – whether to draw with replacement or not"
+    ],
+    "returns": "a tensor where each row contains num_samples indices sampled from the multinomial probability distribution located in the corresponding row of tensor input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> gen = flow.manual_seed(0)\n>>> weights = flow.tensor([0, 10, 3, 0], dtype=flow.float) # create a tensor of weights\n>>> flow.multinomial(weights, 2)\ntensor([1, 2], dtype=oneflow.int64)\n>>> flow.multinomial(weights, 4, replacement=True)\ntensor([1, 2, 1, 1], dtype=oneflow.int64)\n"
+  },
+  {
+    "name": "oneflow.abs",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Return the absolute value of each element in input tensor:math:y = |x| element-wise.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> x = flow.tensor(np.array([-1, 2, -3, 4]).astype(np.float32))\n>>> flow.abs(x)\ntensor([1., 2., 3., 4.], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.acos",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the inverse cosine of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the inverse cosine of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> arr = np.array([0.5, 0.6, 0.7])\n>>> input = flow.tensor(arr, dtype=flow.float32)\n>>> output = flow.acos(input)\n>>> output\ntensor([1.0472, 0.9273, 0.7954], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.acosh",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the inverse hyperbolic cosine of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the inverse hyperbolic cosine of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> x1 = flow.tensor(np.array([2, 3, 4]).astype(np.float32))\n>>> out1 = flow.acosh(x1)\n>>> out1\ntensor([1.3170, 1.7627, 2.0634], dtype=oneflow.float32)\n>>> x2 = flow.tensor(np.array([1.5, 2.6, 3.7]).astype(np.float32),device=flow.device('cuda'))\n>>> out2 = flow.acosh(x2)\n>>> out2\ntensor([0.9624, 1.6094, 1.9827], device='cuda:0', dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.arccos",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the inverse cosine of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the inverse cosine of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> arr = np.array([0.5, 0.6, 0.7])\n>>> input = flow.tensor(arr, dtype=flow.float32)\n>>> output = flow.acos(input)\n>>> output\ntensor([1.0472, 0.9273, 0.7954], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.arccosh",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the inverse hyperbolic cosine of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the inverse hyperbolic cosine of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> x1 = flow.tensor(np.array([2, 3, 4]).astype(np.float32))\n>>> out1 = flow.acosh(x1)\n>>> out1\ntensor([1.3170, 1.7627, 2.0634], dtype=oneflow.float32)\n>>> x2 = flow.tensor(np.array([1.5, 2.6, 3.7]).astype(np.float32),device=flow.device('cuda'))\n>>> out2 = flow.acosh(x2)\n>>> out2\ntensor([0.9624, 1.6094, 1.9827], device='cuda:0', dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.add",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Adds other, scaled by alpha, to input. Scalar and broadcast promotation are supported.",
+    "parameters": [
+      "input (Union[int, float, oneflow.Tensor]) – the input tensor.",
+      "other (Union[int, float, oneflow.Tensor]) – the tensor or number to add to input."
+    ],
+    "returns": "the output Tensor.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n# element-wise add\n>>> x = flow.tensor(np.random.randn(2,3), dtype=flow.float32)\n>>> y = flow.tensor(np.random.randn(2,3), dtype=flow.float32)\n>>> out = flow.add(x, y).numpy()\n>>> out.shape\n(2, 3)\n\n# scalar add\n>>> x = 5\n>>> y = flow.tensor(np.random.randn(2,3), dtype=flow.float32)\n>>> out = flow.add(x, y).numpy()\n>>> out.shape\n(2, 3)\n\n# broadcast add\n>>> x = flow.tensor(np.random.randn(1,1), dtype=flow.float32)\n>>> y = flow.tensor(np.random.randn(2,3), dtype=flow.float32)\n>>> out = flow.add(x, y).numpy()\n>>> out.shape\n(2, 3)\n\n# use alpha\n>>> x = flow.zeros(2, 3)\n>>> y = flow.ones(2, 3)\n>>> out = flow.add(x, y, alpha=10)\n>>> out\ntensor([[10., 10., 10.],\n        [10., 10., 10.]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.addcdiv",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This function is equivalent to PyTorch’s addcdiv function. The documentation is referenced from: https://pytorch.org/docs/1.10/generated/torch.addcdiv.html.",
+    "parameters": [
+      "input (Tensor) – the tensor to be added",
+      "tensor1 (Tensor) – the numerator tensor",
+      "tensor2 (Tensor) – the denominator tensor"
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> input = flow.tensor([ 0.3810,  1.2774, -0.2972, -0.3719])\n>>> tensor1 = flow.tensor([0.8032,  0.2930, -0.8113, -0.2308])\n>>> tensor2 = flow.tensor([[0.5], [1]])\n>>> output = flow.addcdiv(input, tensor1, tensor2)\n>>> output.shape\noneflow.Size([2, 4])\n"
+  },
+  {
+    "name": "oneflow.addcmul",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Performs the element-wise multiplication of tensor1 by tensor2, multiply the result by the scalar value and add it to input. The documentation is referenced from: https://pytorch.org/docs/1.10/generated/torch.addcmul.html",
+    "parameters": [
+      "input (Tensor) – the tensor to be added.",
+      "tensor1 (Tensor) – the tensor to be multiplied.",
+      "tensor2 (Tensor) – the tensor to be multiplied."
+    ],
+    "returns": "the output Tensor.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n\n>>> input = flow.rand(2, 3, 4)\n>>> tensor1 = flow.rand(2, 3, 4)\n>>> tensor2 = flow.rand(2, 3, 4)\n>>> out = flow.addcmul(input, tensor1, tensor2, value=2)\n>>> out.size()\noneflow.Size([2, 3, 4])\n"
+  },
+  {
+    "name": "oneflow.asin",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the arcsine of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the arcsine of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> input = flow.tensor(np.array([-0.5,  0.8, 1.0,  -0.8]), dtype=flow.float32)\n>>> output = flow.asin(input)\n>>> output.shape\noneflow.Size([4])\n>>> output\ntensor([-0.5236,  0.9273,  1.5708, -0.9273], dtype=oneflow.float32)\n>>> input1 = flow.tensor(np.array([[0.8, 1.0], [-0.6, -1.0]]), dtype=flow.float32)\n>>> output1 = input1.asin()\n>>> output1.shape\noneflow.Size([2, 2])\n>>> output1\ntensor([[ 0.9273,  1.5708],\n        [-0.6435, -1.5708]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.asinh",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the inverse hyperbolic sine of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the inverse hyperbolic sine of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> input = flow.tensor(np.array([2, 3, 4]), dtype=flow.float32)\n>>> output = flow.asinh(input)\n>>> output.shape\noneflow.Size([3])\n>>> output\ntensor([1.4436, 1.8184, 2.0947], dtype=oneflow.float32)\n\n>>> input1 = flow.tensor(np.array([[-1, 0, -0.4], [5, 7, 0.8]]), dtype=flow.float32)\n>>> output1 = input1.asinh()\n>>> output1.shape\noneflow.Size([2, 3])\n>>> output1\ntensor([[-0.8814,  0.0000, -0.3900],\n        [ 2.3124,  2.6441,  0.7327]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.arcsin",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the arcsine of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the arcsine of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> input = flow.tensor(np.array([-0.5,  0.8, 1.0,  -0.8]), dtype=flow.float32)\n>>> output = flow.asin(input)\n>>> output.shape\noneflow.Size([4])\n>>> output\ntensor([-0.5236,  0.9273,  1.5708, -0.9273], dtype=oneflow.float32)\n>>> input1 = flow.tensor(np.array([[0.8, 1.0], [-0.6, -1.0]]), dtype=flow.float32)\n>>> output1 = input1.asin()\n>>> output1.shape\noneflow.Size([2, 2])\n>>> output1\ntensor([[ 0.9273,  1.5708],\n        [-0.6435, -1.5708]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.arcsinh",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the inverse hyperbolic sine of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the inverse hyperbolic sine of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> input = flow.tensor(np.array([2, 3, 4]), dtype=flow.float32)\n>>> output = flow.asinh(input)\n>>> output.shape\noneflow.Size([3])\n>>> output\ntensor([1.4436, 1.8184, 2.0947], dtype=oneflow.float32)\n\n>>> input1 = flow.tensor(np.array([[-1, 0, -0.4], [5, 7, 0.8]]), dtype=flow.float32)\n>>> output1 = input1.asinh()\n>>> output1.shape\noneflow.Size([2, 3])\n>>> output1\ntensor([[-0.8814,  0.0000, -0.3900],\n        [ 2.3124,  2.6441,  0.7327]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.atan",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the arctangent of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the arctangent of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> input = flow.tensor(np.array([0.5, 0.6, 0.7]), dtype=flow.float32)\n>>> output = flow.atan(input)\n>>> output.shape\noneflow.Size([3])\n"
+  },
+  {
+    "name": "oneflow.atanh",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the inverse hyperbolic tangent of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the inverse hyperbolic tangent of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> np_arr = np.array([0.5, 0.6, 0.7]).astype(np.float32)\n>>> input = flow.tensor(np_arr, dtype=flow.float32)\n>>> output = flow.atanh(input)\n>>> output\ntensor([0.5493, 0.6931, 0.8673], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.arctan",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the arctangent of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the arctangent of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> input = flow.tensor(np.array([0.5, 0.6, 0.7]), dtype=flow.float32)\n>>> output = flow.atan(input)\n>>> output.shape\noneflow.Size([3])\n"
+  },
+  {
+    "name": "oneflow.arctanh",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the inverse hyperbolic tangent of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the inverse hyperbolic tangent of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> np_arr = np.array([0.5, 0.6, 0.7]).astype(np.float32)\n>>> input = flow.tensor(np_arr, dtype=flow.float32)\n>>> output = flow.atanh(input)\n>>> output\ntensor([0.5493, 0.6931, 0.8673], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.atan2",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Element-wise arctangent of input{i}/other{i} with consideration of the quadrant. Returns a new tensor with the signed angles in radians between vector (other{i},input{i}) and vector (1, 0).",
+    "parameters": [
+      "input (Tensor) – the first input tensor.",
+      "other (Tensor) – the second input tensor."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> x1 = flow.Tensor(np.array([1,2,3]))\n>>> y1 = flow.Tensor(np.array([3,2,1]))\n>>> x2 = flow.Tensor(np.array([1.53123589,0.54242598,0.15117185]))\n>>> y2 = flow.Tensor(np.array([-0.21906378,0.09467151,-0.75562878]))\n>>> x3 = flow.Tensor(np.array([1,0,-1]))\n>>> y3 = flow.Tensor(np.array([0,1,0]))\n\n>>> flow.atan2(x1,y1).numpy()\narray([0.32175055, 0.7853982 , 1.2490457 ], dtype=float32)\n>>> flow.atan2(x2,y2).numpy()\narray([1.7128955, 1.3980033, 2.9441385], dtype=float32)\n>>> flow.atan2(x3,y3).numpy()\narray([ 1.5707964,  0.       , -1.5707964], dtype=float32)\n"
+  },
+  {
+    "name": "oneflow.ceil",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the ceil of the elements of input, the smallest integer greater than or equal to each element.",
+    "parameters": [
+      "input (oneflow.Tensor) – A Tensor."
+    ],
+    "returns": "The result Tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> x = flow.tensor(np.array([0.1, -2, 3.4]).astype(np.float32))\n>>> y = flow.ceil(x)\n>>> y.shape\noneflow.Size([3])\n>>> y\ntensor([ 1., -2.,  4.], dtype=oneflow.float32)\n>>> x = flow.tensor(np.array([[2.5, 4.6, 0.6],[7.8, 8.3, 9.2]]).astype(np.float32))\n>>> y = x.ceil()\n>>> y.shape\noneflow.Size([2, 3])\n>>> y\ntensor([[ 3.,  5.,  1.],\n        [ 8.,  9., 10.]], dtype=oneflow.float32)\n>>> x = flow.tensor(np.array([[[2.2, 4.4, 6.5],[7.1, 8.2, 9.3]],[[10.6,11.2,12.2],[13.5,14.8,15.9]]]).astype(np.float32))\n>>> y = flow.ceil(x)\n>>> y.shape\noneflow.Size([2, 2, 3])\n>>> y\ntensor([[[ 3.,  5.,  7.],\n         [ 8.,  9., 10.]],\n\n        [[11., 12., 13.],\n         [14., 15., 16.]]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.clamp",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Clamp all elements in input into the range [ min, max ] and return a resulting tensor:",
+    "parameters": [
+      "input (Tensor) – the input tensor.",
+      "min (Number) – lower-bound of the range to be clamped to. Defaults to None.",
+      "max (Number) – upper-bound of the range to be clamped to. Defaults to None.",
+      "out (Tensor, optional) – the output tensor."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> arr = np.array([0.2, 0.6, -1.5, -0.3])\n>>> input = flow.Tensor(arr)\n>>> output = flow.clamp(input, min=-0.5, max=0.5)\n>>> output\ntensor([ 0.2000,  0.5000, -0.5000, -0.3000], dtype=oneflow.float32)\n\n>>> arr = np.array([0.2, 0.6, -1.5, -0.3])\n>>> input = flow.Tensor(arr)\n>>> output = flow.clamp(input, min=None, max=0.5)\n>>> output\ntensor([ 0.2000,  0.5000, -1.5000, -0.3000], dtype=oneflow.float32)\n\n>>> arr = np.array([0.2, 0.6, -1.5, -0.3])\n>>> input = flow.Tensor(arr)\n>>> output = flow.clamp(input, min=-0.5, max=None)\n>>> output\ntensor([ 0.2000,  0.6000, -0.5000, -0.3000], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.clamp_min",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Clamp all elements in input which are less than min to min and return a resulting tensor:",
+    "parameters": [
+      "input (Tensor) – the input tensor.",
+      "min (Number) – lower-bound of the range to be clamped to.",
+      "out (Tensor, optional) – the output tensor."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> input = flow.Tensor([0.2, 0.6, -1.5, -0.3])\n>>> output = flow.clamp_min(input, min=-0.5)\n>>> output\ntensor([ 0.2000,  0.6000, -0.5000, -0.3000], dtype=oneflow.float32)\n\n>>> input = flow.Tensor([0.2, 0.6, -1.5, -0.3])\n>>> output = flow.clamp_min(input, min=-2)\n>>> output\ntensor([ 0.2000,  0.6000, -1.5000, -0.3000], dtype=oneflow.float32)\n\n>>> input = flow.Tensor([0.2, 0.6, -1.5, -0.3])\n>>> output = flow.clamp_min(input, min=1)\n>>> output\ntensor([1., 1., 1., 1.], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.clamp_max",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Clamp all elements in input which are greater than max to max and return a resulting tensor:",
+    "parameters": [
+      "input (Tensor) – the input tensor.",
+      "max (Number) – upper-bound of the range to be clamped to.",
+      "out (Tensor, optional) – the output tensor."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> input = flow.Tensor([0.2, 0.6, -1.5, -0.3])\n>>> output = flow.clamp_max(input, max=-0.5)\n>>> output\ntensor([-0.5000, -0.5000, -1.5000, -0.5000], dtype=oneflow.float32)\n\n>>> input = flow.Tensor([0.2, 0.6, -1.5, -0.3])\n>>> output = flow.clamp_max(input, max=-2)\n>>> output\ntensor([-2., -2., -2., -2.], dtype=oneflow.float32)\n\n>>> input = flow.Tensor([0.2, 0.6, -1.5, -0.3])\n>>> output = flow.clamp_max(input, max=1)\n>>> output\ntensor([ 0.2000,  0.6000, -1.5000, -0.3000], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.cos",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the cosine of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the cosine of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> arr = np.array([1.4309,  1.2706, -0.8562,  0.9796])\n>>> input = flow.tensor(arr, dtype=flow.float32)\n>>> output = flow.cos(input).numpy()\n"
+  },
+  {
+    "name": "oneflow.cosh",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the hyperbolic cosine of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the hyperbolic cosine of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> arr = np.array([ 0.1632,  1.1835, -0.6979, -0.7325])\n>>> input = flow.tensor(arr, dtype=flow.float32)\n>>> output = flow.cosh(input).numpy()\n>>> output\narray([1.0133467, 1.7859949, 1.2535787, 1.2804903], dtype=float32)\n"
+  },
+  {
+    "name": "oneflow.div",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the division of input by other for each element, scalar and broadcast promotation are supported. The formula is:",
+    "parameters": [
+      "input (Union[int, float, oneflow.Tensor]) – input.",
+      "other (Union[int, float, oneflow.Tensor]) – other."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n# element-wise divide\n>>> input = flow.tensor(np.random.randn(2,3), dtype=flow.float32)\n>>> other = flow.tensor(np.random.randn(2,3), dtype=flow.float32)\n>>> out = flow.div(input,other).numpy()\n>>> out.shape\n(2, 3)\n\n# scalar divide\n>>> input = 5\n>>> other = flow.tensor(np.random.randn(2,3), dtype=flow.float32)\n>>> out = flow.div(input,other).numpy()\n>>> out.shape\n(2, 3)\n\n# broadcast divide\n>>> input = flow.tensor(np.random.randn(1,1), dtype=flow.float32)\n>>> other = flow.tensor(np.random.randn(2,3), dtype=flow.float32)\n>>> out = flow.div(input,other).numpy()\n>>> out.shape\n(2, 3)\n\n# rounding_mode\n>>> x = flow.tensor([ 0.3810,  1.2774, -0.2972, -0.3719,  0.4637])\n>>> flow.div(x, 0.5)\ntensor([ 0.7620,  2.5548, -0.5944, -0.7438,  0.9274], dtype=oneflow.float32)\n>>> flow.div(x, 0.5, rounding_mode=\"floor\")\ntensor([ 0.,  2., -1., -1.,  0.], dtype=oneflow.float32)\n>>> flow.div(x, 0.5, rounding_mode=\"trunc\")\ntensor([0., 2., -0., -0., 0.], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.erf",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the error function of each element. The error function is defined as follows:",
+    "parameters": [
+      "x (oneflow.Tensor) – A Tensor"
+    ],
+    "returns": "The result Tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> x = flow.tensor(np.array([0, -1., 10.]), dtype=flow.float32)\n>>> out = flow.erf(x)\n>>> out.shape\noneflow.Size([3])\n>>> out.numpy()\narray([ 0.       , -0.8427008,  1.       ], dtype=float32)\n\n>>> x = flow.tensor(np.array([[0, -1., 10.], [5, 7, 0.8]]), dtype=flow.float32)\n>>> out = flow.erf(x)\n>>> out.shape\noneflow.Size([2, 3])\n>>> out.numpy()\narray([[ 0.        , -0.8427008 ,  1.        ],\n       [ 1.        ,  1.        ,  0.74210095]], dtype=float32)\n\n>>> x = flow.tensor(np.array([[0, -1., 10.], [5, 7, 0.8], [2, 3, 4]]), dtype=flow.float32)\n>>> out = x.erf()\n>>> out.shape\noneflow.Size([3, 3])\n>>> out.numpy()\narray([[ 0.        , -0.8427008 ,  1.        ],\n       [ 1.        ,  1.        ,  0.74210095],\n       [ 0.9953223 ,  0.9999779 ,  1.        ]], dtype=float32)\n"
+  },
+  {
+    "name": "oneflow.erfc",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the complementary error function of each element of input. The complementary error function is defined as follows:",
+    "parameters": [
+      "x (oneflow.Tensor) – A Tensor"
+    ],
+    "returns": "The result Tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> x = flow.tensor(np.array([0, -1., 10.]), dtype=flow.float32)\n>>> out = flow.erfc(x)\n>>> out\ntensor([1.0000e+00, 1.8427e+00, 2.8026e-45], dtype=oneflow.float32)\n\n>>> x = flow.tensor(np.array([[0, -1., 10.], [5, 7, 0.8]]), dtype=flow.float32)\n>>> out = flow.erfc(x)\n>>> out\ntensor([[1.0000e+00, 1.8427e+00, 2.8026e-45],\n        [1.5375e-12, 4.1838e-23, 2.5790e-01]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.erfinv",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the inverse error function of input. The inverse error function is defined in the range \\((-1, 1)\\) as:",
+    "parameters": [
+      "input (oneflow.Tensor) – the input tensor."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> input=flow.tensor(np.random.randn(3,3).astype(np.float32))\n>>> of_out=flow.erfinv(input)\n>>> of_out.shape\noneflow.Size([3, 3])\n"
+  },
+  {
+    "name": "oneflow.exp",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This operator computes the exponential of Tensor.",
+    "parameters": [
+      "x (oneflow.Tensor) – A Tensor"
+    ],
+    "returns": "The result Tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> x = flow.tensor(np.array([1, 2, 3]).astype(np.float32), dtype=flow.float32)\n>>> y = flow.exp(x)\n>>> y\ntensor([ 2.7183,  7.3891, 20.0855], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.expm1",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the exponential of the elements minus 1 of input.",
+    "parameters": [
+      "input (oneflow.Tensor) – A Tensor."
+    ],
+    "returns": "The result Tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> x = flow.tensor(np.array([1, 2, 3]).astype(np.float32))\n>>> y = flow.expm1(x)\n>>> y.shape\noneflow.Size([3])\n>>> y\ntensor([ 1.7183,  6.3891, 19.0855], dtype=oneflow.float32)\n\n>>> x = flow.tensor(np.array([[[2, 4, 6],[7, 8, 9]],[[10,11,12],[13,14,15]]]).astype(np.float32))\n>>> y = flow.expm1(x)\n>>> print(y.shape)\noneflow.Size([2, 2, 3])\n>>> print(y.numpy())\n[[[6.3890562e+00 5.3598152e+01 4.0242880e+02]\n  [1.0956332e+03 2.9799580e+03 8.1020840e+03]]\n\n [[2.2025465e+04 5.9873141e+04 1.6275380e+05]\n  [4.4241238e+05 1.2026032e+06 3.2690165e+06]]]\n"
+  },
+  {
+    "name": "oneflow.floor",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the arcsine of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the arcsine of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> input = flow.tensor(np.array([-0.5,  1.5, 0,  0.8]), dtype=flow.float32)\n>>> output = flow.floor(input)\n>>> output.shape\noneflow.Size([4])\n>>> output.numpy()\narray([-1.,  1.,  0.,  0.], dtype=float32)\n\n>>> input1 = flow.tensor(np.array([[0.8, 1.0], [-0.6, 2.5]]), dtype=flow.float32)\n>>> output1 = input1.floor()\n>>> output1.shape\noneflow.Size([2, 2])\n>>> output1.numpy()\narray([[ 0.,  1.],\n       [-1.,  2.]], dtype=float32)\n"
+  },
+  {
+    "name": "oneflow.fmod",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the element-wise remainder of division.",
+    "parameters": [
+      "input (Tensor) – the dividend",
+      "other (Tensor or Scalar) – the divisor"
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> flow.fmod(flow.tensor([-3., -2, -1, 1, 2, 3], dtype=flow.float32), 2.)\ntensor([-1., -0., -1.,  1.,  0.,  1.], dtype=oneflow.float32)\n>>> flow.fmod(flow.tensor([1, 2, 3, 4, 5.], dtype=flow.float32), 1.5)\ntensor([1.0000, 0.5000, 0.0000, 1.0000, 0.5000], dtype=oneflow.float32)\n>>> flow.fmod(flow.tensor([1, 2, 3, 4., -5]), flow.tensor([4, 2, 1, 3., 1]))\ntensor([1., 0., 0., 1., -0.], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.gelu",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Applies the Gaussian Error Linear Units function:",
+    "parameters": [
+      "input (oneflow.Tensor) – Input Tensor",
+      "approximate (string, optional) – the gelu approximation algorithm to use: 'none' | 'tanh'. Default: 'none'"
+    ],
+    "returns": "A Tensor has same shape as the input.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> x = np.array([-0.5, 0, 0.5]).astype(np.float32)\n>>> input = flow.tensor(x)\n\n>>> out = flow.gelu(input)\n>>> out\ntensor([-0.1543,  0.0000,  0.3457], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.log",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the natural logarithm of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the natural logarithm of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> arr = np.random.randn(2, 3, 4, 5)\n>>> input = flow.tensor(arr, dtype=flow.float32)\n>>> output = flow.log(input)\n"
+  },
+  {
+    "name": "oneflow.log1p",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the natural logarithm of (1 + input).",
+    "parameters": [],
+    "returns": "a new tensor with the natural logarithm of (1 + input).",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> x = flow.tensor(np.array([1.3, 1.5, 2.7]), dtype=flow.float32)\n>>> out = flow.log1p(x)\n>>> out\ntensor([0.8329, 0.9163, 1.3083], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.log2",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the natural logarithm to the base 2 of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the natural logarithm to the base 2 of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> arr = np.random.randn(2, 3, 4, 5)\n>>> input = flow.tensor(arr, dtype=flow.float32)\n>>> output = flow.log2(input)\n"
+  },
+  {
+    "name": "oneflow.log10",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the natural logarithm to the base 10 of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the natural logarithm to the base 10 of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> x = flow.ones(3, 3) * 10\n>>> output = flow.log10(x)\n>>> output\ntensor([[1., 1., 1.],\n        [1., 1., 1.],\n        [1., 1., 1.]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.logical_and",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the element-wise logical AND of the given input tensors. Zeros are treated as False and nonzeros are treated as True.",
+    "parameters": [
+      "input (oneflow.Tensor) – The input Tensor",
+      "other (oneflow.Tensor) – The Tensor to compute AND with"
+    ],
+    "returns": "The output Tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> input1 = flow.tensor(np.array([1, 0, 1]).astype(np.float32), dtype=flow.float32)\n>>> input2 = flow.tensor(np.array([1, 1, 0]).astype(np.float32), dtype=flow.float32)\n\n>>> out = flow.logical_and(input1, input2)\n>>> out\ntensor([ True, False, False], dtype=oneflow.bool)\n"
+  },
+  {
+    "name": "oneflow.logical_not",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the element-wise logical NOT of the given input tensors. Zeros are treated as False and nonzeros are treated as True. :param input: The input Tensor :type input: oneflow.Tensor :param other: The Tensor to compute NOT with :type other: oneflow.Tensor",
+    "parameters": [],
+    "returns": "The output Tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n\n>>> input = flow.tensor([1, 0, -1], dtype=flow.float32)\n>>> out = flow.logical_not(input)\n>>> out\ntensor([False,  True, False], dtype=oneflow.bool)\n"
+  },
+  {
+    "name": "oneflow.logical_or",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the element-wise logical OR of the given input tensors. Zeros are treated as False and nonzeros are treated as True.",
+    "parameters": [
+      "input (oneflow.Tensor) – The input Tensor",
+      "other (oneflow.Tensor) – The Tensor to compute OR with"
+    ],
+    "returns": "The output Tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> input1 = flow.tensor(np.array([1, 0, 1]).astype(np.float32), dtype=flow.float32)\n>>> input2 = flow.tensor(np.array([1, 0, 0]).astype(np.float32), dtype=flow.float32)\n\n>>> out = flow.logical_or(input1, input2)\n>>> out\ntensor([ True, False,  True], dtype=oneflow.bool)\n"
+  },
+  {
+    "name": "oneflow.logical_xor",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the element-wise logical XOR of the given input tensors. Zeros are treated as False and nonzeros are treated as True.",
+    "parameters": [
+      "input (oneflow.Tensor) – The input Tensor",
+      "other (oneflow.Tensor) – The Tensor to compute XOR with"
+    ],
+    "returns": "The output Tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> input1 = flow.tensor(np.array([1, 0, 1]).astype(np.float32), dtype=flow.float32)\n>>> input2 = flow.tensor(np.array([1, 0, 0]).astype(np.float32), dtype=flow.float32)\n>>> out = flow.logical_xor(input1, input2)\n>>> out\ntensor([False, False,  True], dtype=oneflow.bool)\n"
+  },
+  {
+    "name": "oneflow.bitwise_and",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the bitwise AND of input and other. The input tensor must be of integral or Boolean types. For bool tensors, it computes the logical AND.",
+    "parameters": [
+      "input (oneflow.Tensor) – The input Tensor",
+      "other (oneflow.Tensor) – The Tensor to compute bitwise AND with"
+    ],
+    "returns": "The output Tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> x = flow.tensor([1, 2, 3])\n>>> flow.bitwise_and(x, 2)\ntensor([0, 2, 2], dtype=oneflow.int64)\n>>> y = flow.tensor([5, 6, 7])\n>>> flow.bitwise_and(x, y)\ntensor([1, 2, 3], dtype=oneflow.int64)\n"
+  },
+  {
+    "name": "oneflow.bitwise_or",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the bitwise OR of input and other. The input tensor must be of integral or Boolean types. For bool tensors, it computes the logical OR.",
+    "parameters": [
+      "input (oneflow.Tensor) – The input Tensor",
+      "other (oneflow.Tensor) – The Tensor to compute OR with"
+    ],
+    "returns": "The output Tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> x = flow.tensor([1, 2, 3])\n>>> flow.bitwise_or(x, 4)\ntensor([5, 6, 7], dtype=oneflow.int64)\n>>> y = flow.tensor([5, 6, 7])\n>>> flow.bitwise_or(x, y)\ntensor([5, 6, 7], dtype=oneflow.int64)\n"
+  },
+  {
+    "name": "oneflow.bitwise_xor",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the bitwise XOR of input and other. The input tensor must be of integral or Boolean types. For bool tensors, it computes the logical XOR.",
+    "parameters": [
+      "input (oneflow.Tensor) – The input Tensor",
+      "other (oneflow.Tensor) – The Tensor to compute XOR with"
+    ],
+    "returns": "The output Tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> x = flow.tensor([1, 2, 3])\n>>> flow.bitwise_xor(x, 2)\ntensor([3, 0, 1], dtype=oneflow.int64)\n>>> y = flow.tensor([5, 6, 7])\n>>> flow.bitwise_xor(x, y)\ntensor([4, 4, 4], dtype=oneflow.int64)\n"
+  },
+  {
+    "name": "oneflow.bitwise_not",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the bitwise NOT of input. The input tensor must be of integral or Boolean types. For bool tensors, it computes the logical NOT.",
+    "parameters": [
+      "input (oneflow.Tensor) – The input Tensor"
+    ],
+    "returns": "The output Tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> x = flow.tensor([1, 2, 3])\n>>> flow.bitwise_not(x)\ntensor([-2, -3, -4], dtype=oneflow.int64)\n>>> x = flow.tensor([0, 0, 1]).bool()\n>>> flow.bitwise_not(x)\ntensor([ True,  True, False], dtype=oneflow.bool)\n"
+  },
+  {
+    "name": "oneflow.mish",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Applies the element-wise function:",
+    "parameters": [],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> x = np.array([1, 2, 3]).astype(np.float32)\n>>> input = flow.tensor(x)\n\n>>> out = flow.mish(input)\n>>> out\ntensor([0.8651, 1.9440, 2.9865], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.mul",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the multiplication of input by other for each element, scalar and broadcast promotation are supported.",
+    "parameters": [],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n# element-wise multiply\n>>> input = flow.tensor(np.random.randn(2,3), dtype=flow.float32)\n>>> other = flow.tensor(np.random.randn(2,3), dtype=flow.float32)\n>>> out = flow.mul(input,other).numpy()\n>>> out.shape\n(2, 3)\n\n# scalar mutiply\n>>> input = 5\n>>> other = flow.tensor(np.random.randn(2,3), dtype=flow.float32)\n>>> out = flow.mul(input,other).numpy()\n>>> out.shape\n(2, 3)\n\n# broadcast mutiply\n>>> input = flow.tensor(np.random.randn(1,1), dtype=flow.float32)\n>>> other = flow.tensor(np.random.randn(2,3), dtype=flow.float32)\n>>> out = flow.mul(input,other).numpy()\n>>> out.shape\n(2, 3)\n"
+  },
+  {
+    "name": "oneflow.neg",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This operator computes the negative value of Tensor.",
+    "parameters": [
+      "input (oneflow.Tensor) – A Tensor"
+    ],
+    "returns": "The result Tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> input = flow.tensor(\n...    np.array([1.0, -1.0, 2.3]).astype(np.float32), dtype=flow.float32\n... )\n>>> out = flow.negative(input)\n>>> out\ntensor([-1.0000,  1.0000, -2.3000], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.negative",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This operator computes the negative value of Tensor.",
+    "parameters": [
+      "input (oneflow.Tensor) – A Tensor"
+    ],
+    "returns": "The result Tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> input = flow.tensor(\n...    np.array([1.0, -1.0, 2.3]).astype(np.float32), dtype=flow.float32\n... )\n>>> out = flow.negative(input)\n>>> out\ntensor([-1.0000,  1.0000, -2.3000], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.pow",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Takes the power of each element in input with exponent and returns a tensor with the result. Exponent can be either a single float number, a single int number, or a tensor with the same shape as input. When exponent is a scalar value, the operation applied is:",
+    "parameters": [
+      "input (Tensor) – the input tensor.",
+      "exponent (int, float, Tensor) – the exponent."
+    ],
+    "returns": "The result of variance on the specified axis of input Tensor",
+    "return_type": "Tensor",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> x = flow.tensor(np.array([1.0, 2.0, 3.0, 4.0, 5.0, 6.0]), dtype=flow.float32)\n>>> out = flow.pow(x, 2)\n>>> out\ntensor([ 1.,  4.,  9., 16., 25., 36.], dtype=oneflow.float32)\n\n>>> x = flow.tensor(np.array([1.0, 2.0, 3.0, 4.0]), dtype=flow.float32)\n>>> y = flow.tensor(np.array([1.0, 2.0, 3.0, 4.0]), dtype=flow.float32)\n>>> out = flow.pow(x, y)\n>>> out\ntensor([  1.,   4.,  27., 256.], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.reciprocal",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the safe reciprocal of x. If x is zero, the reciprocal will be also set to zero.",
+    "parameters": [],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> x = flow.tensor(np.array([[1, 2, 3], [4, 5, 6]]), dtype=flow.float32)\n>>> out = flow.reciprocal(x)\n>>> out.numpy()\narray([[1.        , 0.5       , 0.33333334],\n       [0.25      , 0.2       , 0.16666667]], dtype=float32)\n"
+  },
+  {
+    "name": "oneflow.round",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This operator rounds the value of Blob to the nearest integer.",
+    "parameters": [
+      "input (oneflow.Tensor) – A Tensor"
+    ],
+    "returns": "The result Tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> x1 = flow.tensor(np.array([1.49999, 1.500001, 2.7]).astype(np.float32))\n>>> out1 = flow.round(x1)\n>>> out1.numpy()\narray([1., 2., 3.], dtype=float32)\n>>> x2 = flow.tensor(np.array([2.499999, 7.5000001, 5.3, 6.8]).astype(np.float32))\n>>> out2 = flow.round(x2)\n>>> out2.numpy()\narray([2., 8., 5., 7.], dtype=float32)\n"
+  },
+  {
+    "name": "oneflow.rsqrt",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the reciprocal of the square-root of each of the elements of input.",
+    "parameters": [
+      "input – the input tensor."
+    ],
+    "returns": "a new tensor with the reciprocal of the square-root of each of the elements of input.",
+    "return_type": "",
+    "examples": ""
+  },
+  {
+    "name": "oneflow.selu",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Applies element-wise function",
+    "parameters": [],
+    "returns": "",
+    "return_type": "",
+    "examples": ""
+  },
+  {
+    "name": "oneflow.softmax",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Softmax is defined as:",
+    "parameters": [],
+    "returns": "",
+    "return_type": "",
+    "examples": ""
+  },
+  {
+    "name": "oneflow.softplus",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Applies the element-wise function:",
+    "parameters": [],
+    "returns": "",
+    "return_type": "",
+    "examples": ""
+  },
+  {
+    "name": "oneflow.softsign",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API The formula is:",
+    "parameters": [],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> x = np.array([1, 2, 3]).astype(np.float32)\n>>> input = flow.tensor(x)\n>>> out = flow.nn.functional.softsign(input)\n>>> out\ntensor([0.5000, 0.6667, 0.7500], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.silu",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API The formula is:",
+    "parameters": [],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> x = np.array([1, 2, 3]).astype(np.float32)\n>>> input = flow.tensor(x)\n>>> out = flow.silu(input)\n>>> out\ntensor([0.7311, 1.7616, 2.8577], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.sigmoid",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Applies the element-wise function \\(\\text{Sigmoid}(x) = \\frac{1}{1 + \\exp(-x)}\\)",
+    "parameters": [],
+    "returns": "",
+    "return_type": "",
+    "examples": ""
+  },
+  {
+    "name": "oneflow.sign",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the sign of Tensor.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> x1 = flow.tensor(np.array([-2, 0, 2]).astype(np.float32))\n>>> out1 = flow.sign(x1)\n>>> out1.numpy()\narray([-1.,  0.,  1.], dtype=float32)\n>>> x2 = flow.tensor(np.array([-3.2, -4.5, 5.8]).astype(np.float32),device=flow.device('cuda'))\n>>> out2 = flow.sign(x2)\n>>> out2.numpy()\narray([-1., -1.,  1.], dtype=float32)\n"
+  },
+  {
+    "name": "oneflow.sin",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the sine of the elements of input.",
+    "parameters": [
+      "x (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the sine of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> x1 = flow.tensor(np.array([-0.5461,  0.1347, -2.7266, -0.2746]).astype(np.float32))\n>>> y1 = flow.sin(x1)\n>>> y1\ntensor([-0.5194,  0.1343, -0.4032, -0.2712], dtype=oneflow.float32)\n\n>>> x2 = flow.tensor(np.array([-1.4, 2.6, 3.7]).astype(np.float32), device=flow.device('cuda'))\n>>> y2 = flow.sin(x2)\n>>> y2\ntensor([-0.9854,  0.5155, -0.5298], device='cuda:0', dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.sinh",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the hyperbolic sine of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the hyperbolic sine of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> x1 = flow.tensor(np.array([1, 2, 3]), dtype=flow.float32)\n>>> x2 = flow.tensor(np.array([1.53123589,0.54242598,0.15117185]), dtype=flow.float32)\n>>> x3 = flow.tensor(np.array([1,0,-1]), dtype=flow.float32)\n\n>>> flow.sinh(x1).numpy()\narray([ 1.1752012,  3.6268604, 10.017875 ], dtype=float32)\n>>> flow.sinh(x2).numpy()\narray([2.20381  , 0.5694193, 0.1517483], dtype=float32)\n>>> flow.sinh(x3).numpy()\narray([ 1.1752012,  0.       , -1.1752012], dtype=float32)\n"
+  },
+  {
+    "name": "oneflow.sqrt",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the square-root of the elements of input.",
+    "parameters": [
+      "input – the input tensor."
+    ],
+    "returns": "a new tensor with the square-root of the elements of input.",
+    "return_type": "",
+    "examples": ""
+  },
+  {
+    "name": "oneflow.square",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a new tensor with the square of the elements of input.",
+    "parameters": [
+      "input – the input tensor."
+    ],
+    "returns": "a new tensor with the square of the elements of input.",
+    "return_type": "",
+    "examples": ""
+  },
+  {
+    "name": "oneflow.sub",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the subtraction of input by other for each element, scalar and broadcast promotation are supported. The formula is:",
+    "parameters": [],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n# element-wise subtract\n>>> input = flow.tensor(np.random.randn(2,3), dtype=flow.float32)\n>>> other = flow.tensor(np.random.randn(2,3), dtype=flow.float32)\n>>> out = flow.sub(input,other).numpy()\n>>> out.shape\n(2, 3)\n\n# scalar subtract\n>>> input = 5\n>>> other = flow.tensor(np.random.randn(2,3), dtype=flow.float32)\n>>> out = flow.sub(input,other).numpy()\n>>> out.shape\n(2, 3)\n\n# broadcast subtract\n>>> input = flow.tensor(np.random.randn(1,1), dtype=flow.float32)\n>>> other = flow.tensor(np.random.randn(2,3), dtype=flow.float32)\n>>> out = flow.sub(input,other).numpy()\n>>> out.shape\n(2, 3)\n"
+  },
+  {
+    "name": "oneflow.tan",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the tan value of the elements of input.",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "the tan value of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> np_arr = np.array([-1/4*np.pi, 0, 1/4*np.pi]).astype(np.float32)\n>>> input = flow.tensor(np_arr, dtype=flow.float32)\n>>> output = flow.tan(input)\n>>> output\ntensor([-1.,  0.,  1.], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.tanh",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API The equation is:",
+    "parameters": [],
+    "returns": "",
+    "return_type": "",
+    "examples": ""
+  },
+  {
+    "name": "oneflow.trunc",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API The interface is consistent with PyTorch. The documentation is referenced from: https://pytorch.org/docs/1.10/generated/torch.trunc.html",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "a new tensor with the truncated integer values of the elements of input.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> a = flow.tensor([ 3.4742,  0.5466, -0.8008, -0.9079])\n>>> flow.trunc(a)\ntensor([3., 0., -0., -0.], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.lerp",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API The documentation is referenced from: https://pytorch.org/docs/stable/generated/torch.lerp.html.",
+    "parameters": [
+      "start (oneflow.Tensor) – the tensor with the starting points.",
+      "end (oneflow.Tensor) – the tensor with the ending points.",
+      "weight (float or oneflow.Tensor) – the weight for the interpolation formula."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> start = flow.arange(1., 5.)\n>>> end = flow.empty(4).fill_(10)\n>>> flow.lerp(start, end, 0.5)\ntensor([5.5000, 6.0000, 6.5000, 7.0000], dtype=oneflow.float32)\n>>> flow.lerp(start, end, flow.full_like(start, 0.5))\ntensor([5.5000, 6.0000, 6.5000, 7.0000], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.argmax",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API The op computes the index with the largest value of a Tensor at specified axis.",
+    "parameters": [
+      "input (oneflow.Tensor) – Input Tensor",
+      "dim (int, optional) – dimension to be calculated. Defaults to the last dim (-1)",
+      "keepdim (bool optional) – whether the output tensor has dim retained or not. Ignored if dim=None."
+    ],
+    "returns": "A Tensor(dtype=int64) contains the index with the largest value of input",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n\n>>> input = flow.tensor([[1, 3, 8, 7, 2],\n...            [1, 9, 4, 3, 2]], dtype=flow.float32)\n>>> output = flow.argmax(input)\n>>> output\ntensor(6, dtype=oneflow.int64)\n>>> output = flow.argmax(input, dim=1)\n>>> output\ntensor([2, 1], dtype=oneflow.int64)\n"
+  },
+  {
+    "name": "oneflow.argmin",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API The op computes the index with the largest value of a Tensor at specified axis.",
+    "parameters": [
+      "input (oneflow.Tensor) – Input Tensor",
+      "dim (int, optional) – dimension to be calculated. Defaults to the last dim (-1)",
+      "keepdim (bool optional) – whether the output tensor has dim retained or not. Ignored if dim=None."
+    ],
+    "returns": "A Tensor(dtype=int64) contains the index with the largest value of input",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n\n>>> input = flow.tensor([[4, 3, 1, 0, 2],\n...            [5, 9, 7, 6, 8]], dtype=flow.float32)\n>>> output = flow.argmin(input)\n>>> output\ntensor(3, dtype=oneflow.int64)\n>>> output = flow.argmin(input, dim=1)\n>>> output\ntensor([3, 0], dtype=oneflow.int64)\n"
+  },
+  {
+    "name": "oneflow.amax",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the maximum along a dimension.",
+    "parameters": [
+      "input (oneflow.Tensor) – the input Tensor.",
+      "dim (int or List of int, optional) – the dimension or the dimensions to reduce. Dim is None by default.",
+      "keepdim (bool, optional) – whether to retain the dimension. keepdim is False by default."
+    ],
+    "returns": "Maximum of the input tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n\n>>> x = flow.tensor([[[0,1],[2,3]],[[4,5],[6,7]]])\n>>> flow.amax(x, 1)\ntensor([[2, 3],\n        [6, 7]], dtype=oneflow.int64)\n>>> flow.amax(x, 0)\ntensor([[4, 5],\n        [6, 7]], dtype=oneflow.int64)\n>>> flow.amax(x)\ntensor(7, dtype=oneflow.int64)\n>>> flow.amax(x, 0, True)\ntensor([[[4, 5],\n         [6, 7]]], dtype=oneflow.int64)\n"
+  },
+  {
+    "name": "oneflow.amin",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the minimum value of each slice of the input tensor in the given dimension(s) dim.",
+    "parameters": [
+      "input (oneflow.Tensor) – the input Tensor.",
+      "dim (int, Tuple[int]) – the dimension or dimensions to reduce.",
+      "keepdim (bool) – whether the output tensor has dim retained or not."
+    ],
+    "returns": "the minimum value of each slice of the input tensor in the given dimension(s) dim.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n\n>>> x = flow.tensor([[[0,1],[2,3]],[[4,5],[6,7]]])\n>>> flow.amin(x, 1)\ntensor([[0, 1],\n        [4, 5]], dtype=oneflow.int64)\n>>> flow.amin(x, 0)\ntensor([[0, 1],\n        [2, 3]], dtype=oneflow.int64)\n>>> flow.amin(x)\ntensor(0, dtype=oneflow.int64)\n>>> flow.amin(x, 0, True)\ntensor([[[0, 1],\n         [2, 3]]], dtype=oneflow.int64)\n"
+  },
+  {
+    "name": "oneflow.any",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API For each row of input in the given dimension dim, returns True if any element in the row evaluate to True and False otherwise. If the dimension is None, compute if any elements in the input tensor to true.",
+    "parameters": [
+      "input (oneflow.Tensor) – the Input Tensor",
+      "dim (int, optional) – the dimension to reduce. Default: None",
+      "keepdim (bool, optional) – whether the output tensor has dim retained or not. Default: False"
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n\n>>> input = flow.Tensor([[1, 2, 3], [4, 5, 6]]) < 4\n>>> input\ntensor([[ True,  True,  True],\n        [False, False, False]], dtype=oneflow.bool)\n>>> flow.any(input)\ntensor(True, dtype=oneflow.bool)\n>>> flow.any(input, 0)\ntensor([True, True, True], dtype=oneflow.bool)\n>>> flow.any(input, 0, True)\ntensor([[True, True, True]], dtype=oneflow.bool)\n"
+  },
+  {
+    "name": "oneflow.max",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the maximum value of all elements in the input tensor.",
+    "parameters": [
+      "input (oneflow.Tensor) – the Input Tensor",
+      "dim (int, optional) – the dimension to reduce. Default: None",
+      "keepdim (bool, optional) – whether the output tensor has dim retained or not. Default: False"
+    ],
+    "returns": "If dim is None, returns the maximum value of all elements in the input tensor. Otherwise, returns a tuple of Tensor (values, indices), where the values are the maximum value of all elements in the input tensor, the indices are the indices of the elements in the original input tensor.",
+    "return_type": "Tensor or Tuple(oneflow.Tensor, oneflow.Tensor(dtype=int64))",
+    "examples": ">>> import oneflow as flow\n\n>>> input = flow.Tensor([[4, 1, 5], [2, 6, 3]])\n>>> flow.max(input)\ntensor(6., dtype=oneflow.float32)\n>>> result = flow.max(input, dim=1)\n>>> result.values\ntensor([5., 6.], dtype=oneflow.float32)\n>>> result.indices\ntensor([2, 1], dtype=oneflow.int64)\n"
+  },
+  {
+    "name": "oneflow.min",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the minimum value of all elements in the input tensor.",
+    "parameters": [
+      "input (oneflow.Tensor) – the Input Tensor",
+      "dim (int, optional) – the dimension to reduce. Default: None",
+      "keepdim (bool, optional) – whether the output tensor has dim retained or not. Default: False"
+    ],
+    "returns": "If dim is None, returns the minimum value of all elements in the input tensor. Otherwise, returns a tuple of Tensor (values, indices), where the values are the minimum value of all elements in the input tensor, the indices are the indices of the elements in the original input tensor.",
+    "return_type": "Tensor or Tuple(oneflow.Tensor, oneflow.Tensor(dtype=int64))",
+    "examples": ">>> import oneflow as flow\n\n>>> input = flow.Tensor([[4, 1, 5], [2, 6, 3]])\n>>> flow.min(input)\ntensor(1., dtype=oneflow.float32)\n>>> result = flow.min(input, dim=1)\n>>> result.values\ntensor([1., 2.], dtype=oneflow.float32)\n>>> result.indices\ntensor([1, 0], dtype=oneflow.int64)\n"
+  },
+  {
+    "name": "oneflow.mean",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the mean of row of elements in a tensor in the given dimension. If the dimension is None, mean of all elements will be caculated.",
+    "parameters": [
+      "input (oneflow.Tensor) – the Input Tensor",
+      "dim (int or tuple of ints, optional) – the dimension to reduce. Default: None",
+      "keepdim (bool, optional) – whether the output tensor has dim retained or not. Default: False"
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n\n>>> input = flow.Tensor([[1, 2, 3], [4, 5, 6]])\n>>> flow.mean(input)\ntensor(3.5000, dtype=oneflow.float32)\n>>> flow.mean(input, dim=0)\ntensor([2.5000, 3.5000, 4.5000], dtype=oneflow.float32)\n>>> flow.mean(input, dim=1)\ntensor([2., 5.], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.median",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the median of the values in input. The documentation is referenced from: https://pytorch.org/docs/1.10/generated/torch.median.html#torch.median",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "the median of the values in input. The documentation is referenced from: https://pytorch.org/docs/1.10/generated/torch.median.html#torch.median",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> x = flow.tensor((1, 2, -1), dtype=flow.float32)\n>>> flow.median(x)\ntensor(1., dtype=oneflow.float32)\n\n>>> import oneflow as flow\n>>> a = flow.tensor([[ 0.2505, -0.3982, -0.9948,  0.3518, -1.3131],\n...    [ 0.3180, -0.6993,  1.0436,  0.0438,  0.2270],\n...    [-0.2751,  0.7303,  0.2192,  0.3321,  0.2488],\n...    [ 1.0778, -1.9510,  0.7048,  0.4742, -0.7125]])\n>>> result=flow.median(a, 1)\n>>> result.values\ntensor([-0.3982,  0.2270,  0.2488,  0.4742], dtype=oneflow.float32)\n>>> result.indices\ntensor([1, 4, 4, 3], dtype=oneflow.int64)\n"
+  },
+  {
+    "name": "oneflow.mode",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a namedtuple (values, indices) where values is the mode value of each row of the input tensor in the given dimension dim, i.e. a value which appears most often in that row, and indices is the index location of each mode value found.",
+    "parameters": [
+      "input (Tensor) – the input tensor.",
+      "dim (int) – the dimension to reduce. Default: -1",
+      "keepdim (bool) – whether the output tensor has dim retained or not. Default: False"
+    ],
+    "returns": "the result tuple of two output tensors (values, indices)",
+    "return_type": "Tuple(oneflow.Tensor, oneflow.Tensor(dtype=int64))",
+    "examples": ">>> import oneflow as flow\n\n>>> x = flow.tensor([6, 2, 5, 3, 3, 5, 4, 3])\n>>> result = flow.mode(x)\n>>> result.values\ntensor(3, dtype=oneflow.int64)\n>>> result.indices\ntensor(7, dtype=oneflow.int64)\n>>> x = flow.Tensor([[2, 1, 2, 3], [2, 4, 3, 3]])\n>>> result = flow.mode(x, dim=0)\n>>> result.values\ntensor([2., 1., 2., 3.], dtype=oneflow.float32)\n>>> result.indices\ntensor([1, 0, 0, 1], dtype=oneflow.int64)\n"
+  },
+  {
+    "name": "oneflow.prod",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the product of row of elements in a tensor in the given dimension. If the dimension is None, product of all elements will be caculated.",
+    "parameters": [
+      "input (oneflow.Tensor) – the Input Tensor",
+      "dim (int or tuple of ints, optional) – the dimension to reduce. Default: None",
+      "keepdim (bool, optional) – whether the output tensor has dim retained or not. Default: False"
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n\n>>> input = flow.Tensor([[1, 2, 3], [4, 5, 6]])\n>>> flow.prod(input)\ntensor(720., dtype=oneflow.float32)\n>>> flow.prod(input, dim=0)\ntensor([ 4., 10., 18.], dtype=oneflow.float32)\n>>> flow.prod(input, dim=1)\ntensor([  6., 120.], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.nansum",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the sum of each row of the input tensor in the given dimension dim, treating Not a Numbers (NaNs) as zero. If dim is a list of dimensions, reduce over all of them.",
+    "parameters": [
+      "input (oneflow.Tensor) – the Input Tensor",
+      "dim (int, optional) – the dimension to reduce. Default: None",
+      "keepdim (bool, optional) – whether the output tensor has dim retained or not. Default: False",
+      "dtype (oneflow.dtype, optional) – the desired data type of returned tensor. If specified, the input tensor is casted to dtype before the operation is performed. This is useful for preventing data type overflows. Default: None."
+    ],
+    "returns": "the sum of each row of the input tensor in the given dimension dim, treating Not a Numbers (NaNs) as zero. If dim is a list of dimensions, reduce over all of them.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> x = flow.tensor([1., 2., float(\"nan\")])\n>>> flow.nansum(x)\ntensor(3., dtype=oneflow.float32)\n>>> x = flow.tensor([[1., float(\"nan\")], [float(\"nan\"), 2]])\n>>> flow.nansum(x, dim=1)\ntensor([1., 2.], dtype=oneflow.float32)\n>>> x = flow.tensor([float(\"nan\") for i in range(3)])\n>>> flow.nansum(x)\ntensor(0., dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.std",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the standard-deviation of each row of the input tensor in the dimension dim. If dim is a list of dimensions, reduce over all of them.",
+    "parameters": [
+      "input (Tensor) – the input tensor.",
+      "dim (int or tuple of ints) – the dimension or dimensions to reduce.",
+      "unbiased (bool) – whether to use the unbiased estimation or not",
+      "keepdim (bool) – whether the output tensor has dim retained or not."
+    ],
+    "returns": "the standard-deviation of each row of the input tensor in the dimension dim. If dim is a list of dimensions, reduce over all of them.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> arr = np.array([1.0, 2.0, 3.0])\n>>> input = flow.tensor(arr)\n>>> output = flow.std(input, dim=0).numpy()\n>>> output\narray(1.)\n"
+  },
+  {
+    "name": "oneflow.sum",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the sum of row of elements in a tensor in the given dimension. If the dimension is None, sum of all elements will be caculated.",
+    "parameters": [
+      "input (oneflow.Tensor) – the Input Tensor",
+      "dim (int or tuple of ints, optional) – the dimension to reduce. Default: None",
+      "keepdim (bool, optional) – whether the output tensor has dim retained or not. Default: False"
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n\n>>> input = flow.Tensor([[1, 2, 3], [4, 5, 6]])\n>>> flow.sum(input)\ntensor(21., dtype=oneflow.float32)\n>>> flow.sum(input, dim=0)\ntensor([5., 7., 9.], dtype=oneflow.float32)\n>>> flow.sum(input, dim=1)\ntensor([ 6., 15.], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.logsumexp",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the log of summed exponentials of each row of the input tensor in the given dimension dim. The computation is numerically stabilized.",
+    "parameters": [
+      "input (oneflow.Tensor) – the Input Tensor",
+      "dim (int or tuple of ints) – the dimension or dimensions to reduce.",
+      "keepdim (bool, optional) – whether the output tensor has dim retained or not. Default: False"
+    ],
+    "returns": "the log of summed exponentials of each row of the input tensor in the given dimension dim. The computation is numerically stabilized.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n\n>>> input = flow.Tensor([[1, 2, 3], [4, 5, 6]])\n>>> flow.logsumexp(input, 0)\ntensor([4.0486, 5.0486, 6.0486], dtype=oneflow.float32)\n>>> flow.logsumexp(input, 1)\ntensor([3.4076, 6.4076], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.var",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the variance of each row of the input tensor in the given dimension dim.",
+    "parameters": [
+      "input (Tensor) – the input tensor.",
+      "dim (int or tuple of ints) – the dimension or dimensions to reduce. Defaults to None.",
+      "unbiased (bool, optional) – whether to use Bessel’s correction (\\(\\delta N = 1\\)). Defaults to True.",
+      "keepdim (bool, optional) – whether the output tensor has dim retained or not. Defaults to False."
+    ],
+    "returns": "The result of variance on the specified axis of input Tensor",
+    "return_type": "Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> input = flow.tensor(np.random.randn(2, 3, 4, 5))\n>>> output = flow.var(input, 1, True)\n"
+  },
+  {
+    "name": "oneflow.all",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API For each row of input in the given dimension dim, returns True if all element in the row evaluate to True and False otherwise. If the dimension is None, compute if all elements in the input tensor to true.",
+    "parameters": [
+      "input (oneflow.Tensor) – the Input Tensor",
+      "dim (int, optional) – the dimension to reduce. Default: None",
+      "keepdim (bool, optional) – whether the output tensor has dim retained or not. Default: False"
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n\n>>> input = flow.Tensor([[1, 2, 3], [4, 5, 6]]) < 4\n>>> input\ntensor([[ True,  True,  True],\n        [False, False, False]], dtype=oneflow.bool)\n>>> flow.all(input)\ntensor(False, dtype=oneflow.bool)\n>>> flow.all(input, 1)\ntensor([ True, False], dtype=oneflow.bool)\n>>> flow.all(input, 1, True)\ntensor([[ True],\n        [False]], dtype=oneflow.bool)\n"
+  },
+  {
+    "name": "oneflow.argsort",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This operator sorts the input Tensor at specified dim and returns the indices of the sorted Tensor.",
+    "parameters": [
+      "input (oneflow.Tensor) – the input Tensor.",
+      "dim (int, optional) – the dimension to be sorted. Defaults to the last dim (-1).",
+      "descending (bool, optional) – controls the sorting order (ascending or descending)."
+    ],
+    "returns": "The indices of the sorted Tensor.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n>>> x = np.array([[10, 2, 9, 3, 7],\n...               [1, 9, 4, 3, 2]]).astype(\"float32\")\n>>> input = flow.Tensor(x)\n>>> output = flow.argsort(input)\n>>> output\ntensor([[1, 3, 4, 2, 0],\n        [0, 4, 3, 2, 1]], dtype=oneflow.int32)\n>>> output = flow.argsort(input, descending=True)\n>>> output\ntensor([[0, 2, 4, 3, 1],\n        [1, 2, 3, 4, 0]], dtype=oneflow.int32)\n>>> output = flow.argsort(input, dim=0)\n>>> output\ntensor([[1, 0, 1, 0, 1],\n        [0, 1, 0, 1, 0]], dtype=oneflow.int32)\n"
+  },
+  {
+    "name": "oneflow.eq",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes element-wise equality. The second argument can be a number or a tensor whose shape is broadcastable with the first argument.",
+    "parameters": [
+      "input (oneflow.Tensor) – the tensor to compare",
+      "other (oneflow.Tensor, float or int) – the target to compare"
+    ],
+    "returns": "A boolean tensor that is True where input is equal to other and False elsewhere",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> input = flow.tensor(np.array([2, 3, 4, 5]), dtype=flow.float32)\n>>> other = flow.tensor(np.array([2, 3, 4, 1]), dtype=flow.float32)\n\n>>> y = flow.eq(input, other)\n>>> y\ntensor([ True,  True,  True, False], dtype=oneflow.bool)\n"
+  },
+  {
+    "name": "oneflow.equal",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API True if two tensors have the same size and elements, False otherwise.",
+    "parameters": [
+      "input (oneflow.Tensor) – the tensor to compare",
+      "other (oneflow.Tensor) – the target to compare"
+    ],
+    "returns": "A boolean value",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> input = flow.tensor(np.array([2, 3, 4, 5]), dtype=flow.float32)\n>>> other = flow.tensor(np.array([2, 3, 4, 1]), dtype=flow.float32)\n\n>>> y = flow.equal(input, other)\n>>> y\nFalse\n\n>>> y = flow.equal(input, input)\n>>> y\nTrue\n"
+  },
+  {
+    "name": "oneflow.gt",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the truth value of \\(input > other\\) element-wise.",
+    "parameters": [
+      "input (oneflow.Tensor) – A Tensor",
+      "other (oneflow.Tensor) – A Tensor"
+    ],
+    "returns": "A Tensor with bool type.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> input1 = flow.tensor(np.random.randn(2, 6, 5, 3), dtype=flow.float32)\n>>> input2 = flow.tensor(np.random.randn(2, 6, 5, 3), dtype=flow.float32)\n\n>>> out = flow.gt(input1, input2).shape\n>>> out\noneflow.Size([2, 6, 5, 3])\n"
+  },
+  {
+    "name": "oneflow.isinf",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This function is equivalent to PyTorch’s isinf function. The documentation is referenced from: https://pytorch.org/docs/1.10/generated/torch.isinf.html?highlight=isinf#torch.isinf",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "A boolean tensor that is True where input is infinite and False elsewhere.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> flow.isinf(flow.tensor([1, float('inf'), 2, float('-inf'), float('nan')]))\ntensor([False,  True, False,  True, False], dtype=oneflow.bool)\n"
+  },
+  {
+    "name": "oneflow.isnan",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This function is equivalent to PyTorch’s isnan function. The documentation is referenced from: https://pytorch.org/docs/1.10/generated/torch.isnan.html?highlight=isnan#torch.isnan",
+    "parameters": [
+      "input (Tensor) – the input tensor."
+    ],
+    "returns": "A boolean tensor that is True where input is NaN and False elsewhere.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> flow.isnan(flow.tensor([1, float('nan'), 2]))\ntensor([False,  True, False], dtype=oneflow.bool)\n"
+  },
+  {
+    "name": "oneflow.le",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the truth value of \\(input <= other\\) element-wise.",
+    "parameters": [
+      "input (oneflow.Tensor) – A Tensor",
+      "other (oneflow.Tensor) – A Tensor"
+    ],
+    "returns": "A Tensor with bool type.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> input1 = flow.tensor(np.array([1, 2, 3]).astype(np.float32), dtype=flow.float32)\n>>> input2 = flow.tensor(np.array([1, 1, 4]).astype(np.float32), dtype=flow.float32)\n\n>>> out = flow.le(input1, input2)\n>>> out\ntensor([ True, False,  True], dtype=oneflow.bool)\n"
+  },
+  {
+    "name": "oneflow.lt",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the truth value of \\(input < other\\) element-wise.",
+    "parameters": [
+      "input (oneflow.Tensor) – A Tensor",
+      "other (oneflow.Tensor) – A Tensor"
+    ],
+    "returns": "A Tensor with bool type.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> input1 = flow.tensor(np.array([1, 2, 3]).astype(np.float32), dtype=flow.float32)\n>>> input2 = flow.tensor(np.array([1, 2, 4]).astype(np.float32), dtype=flow.float32)\n\n>>> out = flow.lt(input1, input2)\n>>> out\ntensor([False, False,  True], dtype=oneflow.bool)\n"
+  },
+  {
+    "name": "oneflow.ne",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes element-wise not equality. The second argument can be a number or a tensor whose shape is broadcastable with the first argument.",
+    "parameters": [
+      "input (oneflow.Tensor) – the tensor to compare",
+      "other (oneflow.Tensor, float or int) – the target to compare"
+    ],
+    "returns": "A boolean tensor that is True where input is not equal to other and False elsewhere",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> input = flow.tensor(np.array([2, 3, 4, 5]), dtype=flow.float32)\n>>> other = flow.tensor(np.array([2, 3, 4, 1]), dtype=flow.float32)\n\n>>> y = flow.ne(input, other)\n>>> y\ntensor([False, False, False,  True], dtype=oneflow.bool)\n"
+  },
+  {
+    "name": "oneflow.sort",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Sorts the elements of the input tensor along a given dimension in ascending order by value.",
+    "parameters": [
+      "input (oneflow.Tensor) – the input Tensor.",
+      "dim (int, optional) – the dimension to be sorted. Defaults to the last dim (-1).",
+      "descending (bool, optional) – controls the sorting order (ascending or descending)."
+    ],
+    "returns": "A tuple of (values, indices), where where the values are the sorted values and the indices are the indices of the elements in the original input tensor.",
+    "return_type": "Tuple(oneflow.Tensor, oneflow.Tensor(dtype=int32))",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> x = np.array([[1, 3, 8, 7, 2], [1, 9, 4, 3, 2]], dtype=np.float32)\n>>> input = flow.Tensor(x)\n>>> result = flow.sort(input)\n>>> result.values\ntensor([[1., 2., 3., 7., 8.],\n        [1., 2., 3., 4., 9.]], dtype=oneflow.float32)\n>>> result.indices\ntensor([[0, 4, 1, 3, 2],\n        [0, 4, 3, 2, 1]], dtype=oneflow.int32)\n>>> result = flow.sort(input, descending=True)\n>>> result.values\ntensor([[8., 7., 3., 2., 1.],\n        [9., 4., 3., 2., 1.]], dtype=oneflow.float32)\n>>> result.indices\ntensor([[2, 3, 1, 4, 0],\n        [1, 2, 3, 4, 0]], dtype=oneflow.int32)\n>>> result = flow.sort(input, dim=0)\n>>> result.values\ntensor([[1., 3., 4., 3., 2.],\n        [1., 9., 8., 7., 2.]], dtype=oneflow.float32)\n>>> result.indices\ntensor([[0, 0, 1, 1, 0],\n        [1, 1, 0, 0, 1]], dtype=oneflow.int32)\n"
+  },
+  {
+    "name": "oneflow.topk",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Finds the values and indices of the k largest entries at specified axis.",
+    "parameters": [
+      "input (oneflow.Tensor) – Input Tensor",
+      "k (int) – the k in “top-k”",
+      "dim (int, optional) – the dimension to sort along. Defaults to the last dim (-1)",
+      "largest (bool, optional) – controls whether to return largest or smallest elements",
+      "sorted (bool, optional) – controls whether to return the elements in sorted order (Only Support True Now!)"
+    ],
+    "returns": "A tuple of (values, indices), where the indices are the indices of the elements in the original input tensor.",
+    "return_type": "Tuple(oneflow.Tensor, oneflow.Tensor(dtype=int32))",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> x = np.array([[1, 3, 8, 7, 2], [1, 9, 4, 3, 2]], dtype=np.float32)\n>>> result = flow.topk(flow.Tensor(x), k=3, dim=1)\n>>> result.values\ntensor([[8., 7., 3.],\n        [9., 4., 3.]], dtype=oneflow.float32)\n>>> result.indices\ntensor([[2, 3, 1],\n        [1, 2, 3]], dtype=oneflow.int64)\n>>> result.values.shape\noneflow.Size([2, 3])\n>>> result.indices.shape\noneflow.Size([2, 3])\n>>> result = flow.topk(flow.Tensor(x), k=2, dim=1, largest=False)\n>>> result.values\ntensor([[1., 2.],\n        [1., 2.]], dtype=oneflow.float32)\n>>> result.indices\ntensor([[0, 4],\n        [0, 4]], dtype=oneflow.int64)\n>>> result.values.shape\noneflow.Size([2, 2])\n>>> result.indices.shape\noneflow.Size([2, 2])\n"
+  },
+  {
+    "name": "oneflow.ge",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the truth value of \\(input >= other\\) element-wise.",
+    "parameters": [
+      "input (oneflow.Tensor) – A Tensor",
+      "other (oneflow.Tensor) – A Tensor"
+    ],
+    "returns": "A Tensor with bool type.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> input1 = flow.tensor(np.array([1, 2, 3]).astype(np.float32), dtype=flow.float32)\n>>> input2 = flow.tensor(np.array([1, 1, 4]).astype(np.float32), dtype=flow.float32)\n\n>>> out = flow.ge(input1, input2)\n>>> out\ntensor([ True,  True, False], dtype=oneflow.bool)\n"
+  },
+  {
+    "name": "oneflow.greater",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the truth value of \\(input > other\\) element-wise.",
+    "parameters": [
+      "input (oneflow.Tensor) – A Tensor",
+      "other (oneflow.Tensor) – A Tensor"
+    ],
+    "returns": "A Tensor with bool type.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> input1 = flow.tensor(np.random.randn(2, 6, 5, 3), dtype=flow.float32)\n>>> input2 = flow.tensor(np.random.randn(2, 6, 5, 3), dtype=flow.float32)\n\n>>> out = flow.gt(input1, input2).shape\n>>> out\noneflow.Size([2, 6, 5, 3])\n"
+  },
+  {
+    "name": "oneflow.greater_equal",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the truth value of \\(input >= other\\) element-wise.",
+    "parameters": [
+      "input (oneflow.Tensor) – A Tensor",
+      "other (oneflow.Tensor) – A Tensor"
+    ],
+    "returns": "A Tensor with bool type.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> input1 = flow.tensor(np.array([1, 2, 3]).astype(np.float32), dtype=flow.float32)\n>>> input2 = flow.tensor(np.array([1, 1, 4]).astype(np.float32), dtype=flow.float32)\n\n>>> out = flow.ge(input1, input2)\n>>> out\ntensor([ True,  True, False], dtype=oneflow.bool)\n"
+  },
+  {
+    "name": "oneflow.maximum",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the element-wise maximum of x and y.",
+    "parameters": [],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n\n>>> x = flow.tensor((1, 2, -1), dtype=flow.float32)\n>>> y = flow.tensor((3, 0, 4), dtype=flow.float32)\n>>> flow.maximum(x, y)\ntensor([3., 2., 4.], dtype=oneflow.float32)\n\n>>> x = flow.tensor((1,), dtype=flow.float32)\n>>> y = flow.tensor((3, 0, 4), dtype=flow.float32)\n>>> flow.maximum(x, y)\ntensor([3., 1., 4.], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.minimum",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Computes the element-wise minimum of x and y.",
+    "parameters": [],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n\n>>> x = flow.tensor((1, 2, -1), dtype=flow.float32)\n>>> y = flow.tensor((3, 0, 4), dtype=flow.float32)\n>>> flow.minimum(x, y)\ntensor([ 1.,  0., -1.], dtype=oneflow.float32)\n\n>>> x = flow.tensor((1,), dtype=flow.float32)\n>>> y = flow.tensor((3, 0, 4), dtype=flow.float32)\n>>> flow.minimum(x, y)\ntensor([1., 0., 1.], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.not_equal",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API ne(input, other) -> Tensor",
+    "parameters": [
+      "input (oneflow.Tensor) – the tensor to compare",
+      "other (oneflow.Tensor, float or int) – the target to compare"
+    ],
+    "returns": "A boolean tensor that is True where input is not equal to other and False elsewhere",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> input = flow.tensor(np.array([2, 3, 4, 5]), dtype=flow.float32)\n>>> other = flow.tensor(np.array([2, 3, 4, 1]), dtype=flow.float32)\n\n>>> y = flow.ne(input, other)\n>>> y\ntensor([False, False, False,  True], dtype=oneflow.bool)\n"
+  },
+  {
+    "name": "oneflow.isclose",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API The documentation is referenced from: https://pytorch.org/docs/1.10/generated/torch.isclose.html",
+    "parameters": [
+      "input (oneflow.Tensor) – first tensor to compare",
+      "other (oneflow.Tensor) – second tensor to compare",
+      "atol (float, optional) – absolute tolerance. Default: 1e-08",
+      "rtol (float, optional) – relative tolerance. Default: 1e-05",
+      "equal_nan (bool, optional) – if True, then two NaN s will be considered equal. Default: False"
+    ],
+    "returns": "A Tensor with bool type.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n\n>>> flow.isclose(flow.tensor((1., 2, 3)), flow.tensor((1 + 1e-10, 3, 4)))\ntensor([ True, False, False], dtype=oneflow.bool)\n\n>>> flow.isclose(flow.tensor((float('inf'), 4)), flow.tensor((float('inf'), 6)), rtol=.5)\ntensor([True, True], dtype=oneflow.bool)\n"
+  },
+  {
+    "name": "oneflow.allclose",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API The documentation is referenced from: https://pytorch.org/docs/1.10/generated/torch.allclose.html",
+    "parameters": [
+      "input (oneflow.Tensor) – first tensor to compare",
+      "other (oneflow.Tensor) – second tensor to compare",
+      "atol (float, optional) – absolute tolerance. Default: 1e-08",
+      "rtol (float, optional) – relative tolerance. Default: 1e-05",
+      "equal_nan (bool, optional) – if True, then two NaN s will be considered equal. Default: False"
+    ],
+    "returns": "A Tensor with bool type.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n\n>>> flow.allclose(flow.tensor([10000., 1e-07]), flow.tensor([10000.1, 1e-08]))\nFalse\n>>> flow.allclose(flow.tensor([10000., 1e-08]), flow.tensor([10000.1, 1e-09]))\nTrue\n>>> flow.allclose(flow.tensor([1.0, float('nan')]), flow.tensor([1.0, float('nan')]))\nFalse\n>>> flow.allclose(flow.tensor([1.0, float('nan')]), flow.tensor([1.0, float('nan')]), equal_nan=True)\nTrue\n"
+  },
+  {
+    "name": "oneflow.cast",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API The operation takes input tensor x and casts it to the output with dtype",
+    "parameters": [
+      "x (oneflow.Tensor) – A Tensor",
+      "dtype (flow.dtype) – Data type of the output tensor"
+    ],
+    "returns": "A Tensor with specific dtype.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> np_arr = np.random.randn(2, 3, 4, 5).astype(np.float32)\n>>> input = flow.tensor(np_arr, dtype=flow.float32)\n>>> output = flow.cast(input, flow.int8)\n>>> np.array_equal(output.numpy(), np_arr.astype(np.int8))\nTrue\n"
+  },
+  {
+    "name": "oneflow.cumprod",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This operator computes the cumulative product of input elements in the given dimension.",
+    "parameters": [
+      "input (Tensor) – the input tensor.",
+      "dim (int) – the dimension to do cumsum whose valid range is [-N, N-1), and the N is tensor’s dimensions"
+    ],
+    "returns": "The result tensor with cumprod result.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> input=flow.tensor([1, 2, 3])\n>>> flow.cumprod(input, dim=0)\ntensor([1, 2, 6], dtype=oneflow.int64)\n"
+  },
+  {
+    "name": "oneflow.cumsum",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This operator computes the cumulative sum of input elements in the given dimension.",
+    "parameters": [
+      "input (Tensor) – the input ND tensor.",
+      "dim (int) – the dimension to do cumsum, valid range is [-N, N-1), N is tensor’s dimensions"
+    ],
+    "returns": "The result tensor with cumsum result.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> input = flow.ones(3, 3)\n>>> dim = 1\n>>> flow.cumsum(input, dim)\ntensor([[1., 2., 3.],\n        [1., 2., 3.],\n        [1., 2., 3.]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.diagonal",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns a partial view of input with the its diagonal elements with respect to dim1 and dim2 appended as a dimension at the end of the shape.",
+    "parameters": [
+      "input (Tensor) – the input tensor.Must be at least 2-dimensional.",
+      "offset (Optional[int], 0) – which diagonal to consider. Default: 0 (main diagonal)",
+      "dim1 (Optional[int], 0) – first dimension with respect to which to take diagonal. Default: 0",
+      "dim2 (Optional[int], 1) – second dimension with respect to which to take diagonal. Default: 1"
+    ],
+    "returns": "the output Tensor.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n\n>>> input = flow.randn(2,  3,  4)\n>>> output = flow.diagonal(input, offset=1, dim1=1, dim2=0)\n>>> output.shape\noneflow.Size([4, 1])\n"
+  },
+  {
+    "name": "oneflow.flatten",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Flattens a contiguous range of dims into a tensor.",
+    "parameters": [
+      "start_dim – first dim to flatten (default = 0).",
+      "end_dim – last dim to flatten (default = -1)."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n>>> input = flow.randn(32, 1, 5, 5)\n>>> output = flow.flatten(input, start_dim=1)\n>>> output.shape\noneflow.Size([32, 25])\n"
+  },
+  {
+    "name": "oneflow.flip",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Reverse the order of a n-D tensor along given axis in dims.",
+    "parameters": [
+      "input (Tensor) – the input tensor",
+      "dims (a list or tuple) – axis to flip on"
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> np_arr = np.arange(0, 8).reshape((2, 2, 2)).astype(np.float32)\n>>> input = flow.Tensor(np_arr)\n>>> input.shape\noneflow.Size([2, 2, 2])\n>>> out = flow.flip(input, [0, 1])\n>>> out\ntensor([[[6., 7.],\n         [4., 5.]],\n\n        [[2., 3.],\n         [0., 1.]]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.meshgrid",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Take \\(N\\) tensors, each of which can be either scalar or 1-dimensional vector, and create \\(N\\) N-dimensional grids, where the \\(i\\) th grid is defined by expanding the \\(i\\) th input over dimensions defined by other inputs.",
+    "parameters": [
+      "tensors (list of Tensor) – list of scalars or 1 dimensional tensors. Scalars will be treated as tensors of size \\((1,)\\) automatically.",
+      "indexing ((string, optional) – the indexing mode, either “xy” or “ij”, defaults to “ij”. If “ij” is selected, the dimensions are in the same order as the cardinality of the inputs. If “xy” is selected, the first dimension corresponds to the cardinality of the second input and the second dimension corresponds to the cardinality of the first input."
+    ],
+    "returns": "If the input has \\(k\\) tensors of size \\((N_1,), (N_2,), \\ldots , (N_k,)\\), then the output would also have \\(k\\) tensors, where all tensors are of size \\((N_1, N_2, \\ldots , N_k)\\).",
+    "return_type": "seq (sequence of Tensors)",
+    "examples": ">>> import numpy as np\n>>> import oneflow as flow\n\n>>> input1 = flow.tensor(np.array([2, 2, 3]), dtype=flow.float32)\n>>> input2 = flow.tensor(np.array([4, 5, 6]), dtype=flow.float32)\n>>> of_x, of_y = flow.meshgrid(input1, input2)\n>>> of_x\ntensor([[2., 2., 2.],\n        [2., 2., 2.],\n        [3., 3., 3.]], dtype=oneflow.float32)\n>>> of_y\ntensor([[4., 5., 6.],\n        [4., 5., 6.],\n        [4., 5., 6.]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.roll",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Roll the tensor along the given dimension(s).",
+    "parameters": [
+      "input (oneflow.Tensor) – the input Tensor.",
+      "shifts (int or tuple of ints) – The number of places by which the elements of the tensor are shifted. If shifts is a tuple, dims must be a tuple of the same size, and each dimension will be rolled by the corresponding value.",
+      "dims (int or tuple of ints) – Axis along which to roll."
+    ],
+    "returns": "The result Tensor.",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> x = np.array([[1, 2],\n...               [3, 4],\n...               [5, 6],\n...               [7, 8]])\n>>> input = flow.Tensor(x)\n>>> input.shape\noneflow.Size([4, 2])\n>>> out = flow.roll(input, 1, 0)\n>>> out\ntensor([[7., 8.],\n        [1., 2.],\n        [3., 4.],\n        [5., 6.]], dtype=oneflow.float32)\n>>> input.roll(-1, 1)\ntensor([[2., 1.],\n        [4., 3.],\n        [6., 5.],\n        [8., 7.]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.tensordot",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Compute tensor dot along given dimensions.",
+    "parameters": [
+      "a (oneflow.Tensor) – The input tensor to compute tensordot",
+      "b (oneflow.Tensor) – The input tensor to compute tensordot",
+      "dims (int or list or tuple or oneflow.Tensor) – The dims to calculate tensordot. If it’s an integer or oneflow.Tensor with only one element, the last dims of tensor a and the first dims of tensor b will be calculated. If it’s a list or tuple or oneflow.Tensor with more than one element, it must contain two array-like object, which represent the dims of tensor a and tensor b to be calculated.",
+      "out (oneflow.Tensor) – The tensor to save result (NOT IMPLEMENTED YET)"
+    ],
+    "returns": "The result tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> a = flow.randn(3, 4, 5)\n>>> b = flow.randn(4, 5, 6)\n>>> flow.tensordot(a, b, dims=2).shape\noneflow.Size([3, 6])\n>>> b = flow.randn(5, 6, 7)\n>>> flow.tensordot(a, b, dims=1).shape\noneflow.Size([3, 4, 6, 7])\n>>> b = flow.randn(3, 4, 7)\n>>> flow.tensordot(a, b, dims=[[0, 1], [0, 1]]).shape\noneflow.Size([5, 7])\n\n>>> import oneflow as flow\n>>> a = flow.randn(2, 4, 3)\n>>> b = flow.randn(3, 4, 2)\n>>> dims = [[0, 2], [2, 0]]\n>>> permuted_a = a.permute(1, 0, 2) # 0, 2 are the dimensions requiring tensordot and are placed in the end in permuting\n>>> permuted_b = b.permute(2, 0, 1) # 2, 0 are the dimensions requiring tensordot and are placed at the beginning in permuting\n>>> reshaped_a = permuted_a.reshape(4, 2 * 3) # 4 is the dimensions of a that do not require tensordot\n>>> reshaped_b = permuted_b.reshape(2 * 3, 4) # 4 is the dimensions of a that do not require tensordot\n>>> matmul_result = flow.matmul(reshaped_a, reshaped_b)\n>>> result = matmul_result.reshape(4, 4) # 4, 4 are the concatentation of dimensions that do not require tensordot of a and b\n>>> flow.all(result == flow.tensordot(a, b, dims))\ntensor(True, dtype=oneflow.bool)\n"
+  },
+  {
+    "name": "oneflow.tril",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the lower triangular part of a matrix (2-D tensor) or batch of matrices input along the specified diagonal, the other elements of the result tensor out are set to 0.",
+    "parameters": [
+      "input (Tensor) – the input tensor.",
+      "diagonal (int, optional) – the diagonal to specify."
+    ],
+    "returns": "the lower triangular part of a matrix (2-D tensor) or batch of matrices input along the specified diagonal, the other elements of the result tensor out are set to 0.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> x = flow.tensor(np.ones(shape=(3, 3)).astype(np.float32))\n>>> flow.tril(x)\ntensor([[1., 0., 0.],\n        [1., 1., 0.],\n        [1., 1., 1.]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.triu",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the upper triangular part of a matrix (2-D tensor) or batch of matrices input, the other elements of the result tensor out are set to 0.",
+    "parameters": [
+      "input (Tensor) – the input tensor.",
+      "diagonal (int, optional) – the diagonal to consider"
+    ],
+    "returns": "the upper triangular part of a matrix (2-D tensor) or batch of matrices input, the other elements of the result tensor out are set to 0.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n\n>>> x = flow.tensor(np.ones(shape=(3, 3)).astype(np.float32))\n>>> flow.triu(x)\ntensor([[1., 1., 1.],\n        [0., 1., 1.],\n        [0., 0., 1.]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.cross",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the cross product of vectors in dimension dim of input and other.",
+    "parameters": [
+      "input (Tensor) – the first input tensor.",
+      "other (Tensor) – the second input tensor.",
+      "dim (int, optional) – the dimension to take the cross-product in. Default: None"
+    ],
+    "returns": "the cross product of vectors in dimension dim of input and other.",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> a = flow.tensor([[ -0.3956, 1.1455,  1.6895],\n...                  [ -0.5849, 1.3672,  0.3599],\n...                  [ -1.1626, 0.7180, -0.0521],\n...                  [ -0.1339, 0.9902, -2.0225]])\n>>> b = flow.tensor([[ -0.0257, -1.4725, -1.2251],\n...                  [ -1.1479, -0.7005, -1.9757],\n...                  [ -1.3904,  0.3726, -1.1836],\n...                  [ -0.9688, -0.7153,  0.2159]])\n>>> flow.cross(a, b)\ntensor([[ 1.0844, -0.5281,  0.6120],\n        [-2.4491, -1.5687,  1.9791],\n        [-0.8304, -1.3036,  0.5651],\n        [-1.2329,  1.9883,  1.0551]], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.bincount",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API oneflow.bincount(input, weights=None, minlength=0) → Tensor",
+    "parameters": [
+      "input (oneflow.Tensor) – 1-d int Tensor",
+      "weights (oneflow.Tensor) – optional, weight for each value in the input tensor. Should be of same size as input tensor.",
+      "minlength (int) – optional, minimum number of bins. Should be non-negative."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> x = flow.tensor([1, 2, 4, 6])\n>>> flow.bincount(x)\ntensor([0, 1, 1, 0, 1, 0, 1], dtype=oneflow.int64)\n>>> x = flow.tensor([1, 2, 1])\n>>> weights = flow.tensor([0.1, 0.2, 0.15])\n>>> flow.bincount(x, weights=weights)\ntensor([0.0000, 0.2500, 0.2000], dtype=oneflow.float32)\n>>> flow.bincount(x, weights=weights, minlength=4)\ntensor([0.0000, 0.2500, 0.2000, 0.0000], dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.unique",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API Returns the unique elements of the input tensor.",
+    "parameters": [
+      "input (Tensor) – The input tensor.",
+      "sorted (bool) – Whether to sort the unique elements in ascending order before returning as output.",
+      "return_inverse (bool) – Whether to also return the indices for where elements in the original input ended up in the returned unique list.",
+      "return_counts (bool) – Whether to also return the counts for each unique element.",
+      "dtype (flow.dtype) – Dtype of the returned indices and counts."
+    ],
+    "returns": "output (Tensor): the output list of unique scalar elements. inverse_indices (Tensor): (optional) if return_inverse is True, there will be an additional returned tensor (same shape as input) representing the indices for where elements in the original input map to in the output; otherwise, this function will only return a single tensor. counts (Tensor): (optional) if return_counts is True, there will be an additional returned tensor (same shape as output or output.size(dim), if dim was specified) representing the number of occurrences for each unique value or tensor.",
+    "return_type": "oneflow.Tensor or List of oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> x = flow.tensor([3, 1, 2, 0 ,2])\n>>> flow.unique(x)\ntensor([0, 1, 2, 3], dtype=oneflow.int64)\n>>> flow.unique(x, sorted=False)\ntensor([3, 1, 2, 0], dtype=oneflow.int64)\n>>> results, indices = flow.unique(x, return_inverse=True)\n>>> indices\ntensor([3, 1, 2, 0, 2], dtype=oneflow.int32)\n>>> results, counts = flow.unique(x, return_counts=True)\n>>> counts\ntensor([1, 1, 2, 1], dtype=oneflow.int32)\n>>> results, indices = flow.unique(x, return_inverse=True, dtype=flow.long)\n>>> indices\ntensor([3, 1, 2, 0, 2], dtype=oneflow.int64)\n"
+  },
+  {
+    "name": "oneflow.dot",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This operator computes the dot product of tensor input and other.",
+    "parameters": [
+      "input (Tensor) – first tensor in the dot product.",
+      "other (Tensor) – second tensor in the dot product."
+    ],
+    "returns": "",
+    "return_type": "",
+    "examples": ">>> import oneflow as flow\n>>> flow.dot(flow.Tensor([2, 3]), flow.Tensor([2, 1]))\ntensor(7., dtype=oneflow.float32)\n"
+  },
+  {
+    "name": "oneflow.matmul",
+    "signature": "oneflow.",
+    "description": "OneFlow Python API This operator applies matrix multiplication to two Tensor.",
+    "parameters": [
+      "a (oneflow.Tensor) – A Tensor",
+      "b (oneflow.Tensor) – A Tensor"
+    ],
+    "returns": "The result Tensor",
+    "return_type": "oneflow.Tensor",
+    "examples": ">>> import oneflow as flow\n>>> import numpy as np\n>>> input1 = flow.tensor(np.random.randn(2, 6), dtype=flow.float32)\n>>> input2 = flow.tensor(np.random.randn(6, 5), dtype=flow.float32)\n>>> of_out = flow.matmul(input1, input2)\n>>> of_out.shape\noneflow.Size([2, 5])\n"
+  }
+]

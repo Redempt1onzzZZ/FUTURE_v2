@@ -1,0 +1,1437 @@
+[
+  {
+    "name": "mlx.core.array.astype",
+    "signature": "astype(self, dtype: Dtype, stream: Optional[Union[Stream, Device]] = None) → array",
+    "description": "Cast the array to a specified type.",
+    "parameters": [
+      "dtype (Dtype) – Type to which the array is cast.",
+      "stream (Stream) – Stream (or device) for the operation."
+    ],
+    "returns": "The array with type dtype.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.array.item",
+    "signature": "item(self) → object",
+    "description": "Access the value of a scalar array.",
+    "parameters": [],
+    "returns": "Standard Python scalar.",
+    "return_type": "object"
+  },
+  {
+    "name": "mlx.core.array.tolist",
+    "signature": "tolist(self) → object",
+    "description": "Convert the array to a Python list.",
+    "parameters": [],
+    "returns": "The Python list. If the array is a scalar then a standard Python scalar is returned. If the array has more than one dimension then the result is a nested list of lists. The value type of the list corresponding to the last dimension is either bool, int or float depending on the dtype of the array.",
+    "return_type": "list"
+  },
+  {
+    "name": "mlx.core.array.shape",
+    "signature": "property shape: array.",
+    "description": "The shape of the array as a Python tuple.",
+    "parameters": [],
+    "returns": "A tuple containing the sizes of each dimension.",
+    "return_type": "tuple(int)"
+  },
+  {
+    "name": "mlx.core.array.size",
+    "signature": "property size: array.",
+    "description": "Number of elements in the array.",
+    "parameters": [],
+    "returns": "",
+    "return_type": ""
+  },
+  {
+    "name": "mlx.core.array.dtype",
+    "signature": "property dtype: array.",
+    "description": "The array’s Dtype.",
+    "parameters": [],
+    "returns": "",
+    "return_type": ""
+  },
+  {
+    "name": "mlx.core.abs",
+    "signature": "abs(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise absolute value.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The absolute value of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.add",
+    "signature": "add(a: scalar | array, b: scalar | array, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise addition. Add two arrays with numpy-style broadcasting semantics. Either or both input arrays can also be scalars.",
+    "parameters": [
+      "a (array) – Input array or scalar.",
+      "b (array) – Input array or scalar."
+    ],
+    "returns": "The sum of a and b.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.all",
+    "signature": "all(a: array, /, axis: None | int | Sequence[int] = None, keepdims: bool = False, *, stream: None | Stream | Device = None) → array",
+    "description": "An and reduction over the given axes.",
+    "parameters": [
+      "a (array) – Input array.",
+      "axis (int or list(int), optional) – Optional axis or axes to reduce over. If unspecified this defaults to reducing over the entire array.",
+      "keepdims (bool, optional) – Keep reduced axes as singleton dimensions, defaults to False."
+    ],
+    "returns": "The output array with the corresponding axes reduced.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.allclose",
+    "signature": "allclose(a: array, b: array, /, rtol: float = 1e-05, atol: float = 1e-08, *, equal_nan: bool = False, stream: None | Stream | Device = None) → array",
+    "description": "Approximate comparison of two arrays. Infinite values are considered equal if they have the same sign, NaN values are not equal unless equal_nan is True.",
+    "parameters": [
+      "a (array) – Input array.",
+      "b (array) – Input array.",
+      "rtol (float) – Relative tolerance.",
+      "atol (float) – Absolute tolerance.",
+      "equal_nan (bool) – If True, NaNs are considered equal. Defaults to False."
+    ],
+    "returns": "The boolean output scalar indicating if the arrays are close.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.any",
+    "signature": "any(a: array, /, axis: None | int | Sequence[int] = None, keepdims: bool = False, *, stream: None | Stream | Device = None) → array",
+    "description": "An or reduction over the given axes.",
+    "parameters": [
+      "a (array) – Input array.",
+      "axis (int or list(int), optional) – Optional axis or axes to reduce over. If unspecified this defaults to reducing over the entire array.",
+      "keepdims (bool, optional) – Keep reduced axes as singleton dimensions, defaults to False."
+    ],
+    "returns": "The output array with the corresponding axes reduced.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.arange",
+    "signature": "arange(start: int | float, stop: int | float, step: None | int | float, dtype: Dtype | None = None, *, stream: None | Stream | Device = None) → array",
+    "description": "Overloaded function.",
+    "parameters": [],
+    "returns": "",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.arccos",
+    "signature": "arccos(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise inverse cosine.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The inverse cosine of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.arccosh",
+    "signature": "arccosh(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise inverse hyperbolic cosine.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The inverse hyperbolic cosine of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.arcsin",
+    "signature": "arcsin(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise inverse sine.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The inverse sine of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.arcsinh",
+    "signature": "arcsinh(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise inverse hyperbolic sine.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The inverse hyperbolic sine of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.arctan",
+    "signature": "arctan(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise inverse tangent.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The inverse tangent of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.arctanh",
+    "signature": "arctanh(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise inverse hyperbolic tangent.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The inverse hyperbolic tangent of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.argmax",
+    "signature": "argmax(a: array, /, axis: None | int = None, keepdims: bool = False, *, stream: None | Stream | Device = None) → array",
+    "description": "Indices of the maximum values along the axis.",
+    "parameters": [
+      "a (array) – Input array.",
+      "axis (int, optional) – Optional axis to reduce over. If unspecified this defaults to reducing over the entire array.",
+      "keepdims (bool, optional) – Keep reduced axes as singleton dimensions, defaults to False."
+    ],
+    "returns": "The uint32 array with the indices of the maximum values.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.argmin",
+    "signature": "argmin(a: array, /, axis: None | int = None, keepdims: bool = False, *, stream: None | Stream | Device = None) → array",
+    "description": "Indices of the minimum values along the axis.",
+    "parameters": [
+      "a (array) – Input array.",
+      "axis (int, optional) – Optional axis to reduce over. If unspecified this defaults to reducing over the entire array.",
+      "keepdims (bool, optional) – Keep reduced axes as singleton dimensions, defaults to False."
+    ],
+    "returns": "The uint32 array with the indices of the minimum values.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.argpartition",
+    "signature": "argpartition(a: array, /, kth: int, axis: None | int = -1, *, stream: None | Stream | Device = None) → array",
+    "description": "Returns the indices that partition the array. The ordering of the elements within a partition in given by the indices is undefined.",
+    "parameters": [
+      "a (array) – Input array.",
+      "kth (int) – Element index at the kth position in the output will give the sorted position. All indices before the kth position will be of elements less or equal to the element at the kth index and all indices after will be of elements greater or equal to the element at the kth index.",
+      "axis (int or None, optional) – Optional axis to partition over. If None, this partitions over the flattened array. If unspecified, it defaults to -1."
+    ],
+    "returns": "The uint32 array containing indices that partition the input.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.argsort",
+    "signature": "argsort(a: array, /, axis: None | int = -1, *, stream: None | Stream | Device = None) → array",
+    "description": "Returns the indices that sort the array.",
+    "parameters": [
+      "a (array) – Input array.",
+      "axis (int or None, optional) – Optional axis to sort over. If None, this sorts over the flattened array. If unspecified, it defaults to -1 (sorting over the last axis)."
+    ],
+    "returns": "The uint32 array containing indices that sort the input.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.array_equal",
+    "signature": "array_equal(a: scalar | array, b: scalar | array, equal_nan: bool = False, stream: None | Stream | Device = None) → array",
+    "description": "Array equality check. Compare two arrays for equality. Returns True if and only if the arrays have the same shape and their values are equal. The arrays need not have the same type to be considered equal.",
+    "parameters": [
+      "a (array) – Input array or scalar.",
+      "b (array) – Input array or scalar.",
+      "equal_nan (bool) – If True, NaNs are considered equal. Defaults to False."
+    ],
+    "returns": "A scalar boolean array.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.ceil",
+    "signature": "ceil(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise ceil.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The ceil of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.clip",
+    "signature": "clip(a: array, /, a_min: scalar | array | None, a_max: scalar | array | None, *, stream: None | Stream | Device = None) → array",
+    "description": "Clip the values of the array between the given minimum and maximum. If either a_min or a_max are None, then corresponding edge is ignored. At least one of a_min and a_max cannot be None. The input a and the limits must broadcast with one another.",
+    "parameters": [
+      "a (array) – Input array.",
+      "a_min (scalar or array or None) – Minimum value to clip to.",
+      "a_max (scalar or array or None) – Maximum value to clip to."
+    ],
+    "returns": "The clipped array.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.concatenate",
+    "signature": "concatenate(arrays: list[array], axis: int | None = 0, *, stream: None | Stream | Device = None) → array",
+    "description": "Concatenate the arrays along the given axis.",
+    "parameters": [
+      "arrays (list(array)) – Input list or tuple of arrays.",
+      "axis (int, optional) – Optional axis to concatenate along. If unspecified defaults to 0."
+    ],
+    "returns": "The concatenated array.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.conv1d",
+    "signature": "conv1d(input: array, weight: array, /, stride: int = 1, padding: int = 0, dilation: int = 1, groups: int = 1, *, stream: None | Stream | Device = None) → array",
+    "description": "1D convolution over an input with several channels",
+    "parameters": [
+      "input (array) – Input array of shape (N, H, C_in).",
+      "weight (array) – Weight array of shape (C_out, H, C_in).",
+      "stride (int, optional) – Kernel stride. Default: 1.",
+      "padding (int, optional) – Input padding. Default: 0.",
+      "dilation (int, optional) – Kernel dilation. Default: 1.",
+      "groups (int, optional) – Input feature groups. Default: 1."
+    ],
+    "returns": "The convolved array.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.conv2d",
+    "signature": "conv2d(input: array, weight: array, /, stride: int | tuple[int, int] = 1, padding: int | tuple[int, int] = 0, dilation: int | tuple[int, int] = 1, groups: int = 1, *, stream: None | Stream | Device = None) → array",
+    "description": "2D convolution over an input with several channels",
+    "parameters": [
+      "input (array) – Input array of shape (N, H, W, C_in).",
+      "weight (array) – Weight array of shape (C_out, H, W, C_in).",
+      "stride (int or tuple(int), optional) – tuple of size 2 with kernel strides. All spatial dimensions get the same stride if only one number is specified. Default: 1.",
+      "padding (int or tuple(int), optional) – tuple of size 2 with symmetric input padding. All spatial dimensions get the same padding if only one number is specified. Default: 0.",
+      "dilation (int or tuple(int), optional) – tuple of size 2 with kernel dilation. All spatial dimensions get the same dilation if only one number is specified. Default: 1",
+      "groups (int, optional) – input feature groups. Default: 1."
+    ],
+    "returns": "The convolved array.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.cos",
+    "signature": "cos(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise cosine.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The cosine of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.cosh",
+    "signature": "cosh(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise hyperbolic cosine.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The hyperbolic cosine of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.diag",
+    "signature": "diag(a: array, /, k: int = 0, *, stream: None | Stream | Device = None) → array",
+    "description": "Extract a diagonal or construct a diagonal matrix. If a is 1-D then a diagonal matrix is constructed with a on the \\(k\\)-th diagonal. If a is 2-D then the \\(k\\)-th diagonal is returned.",
+    "parameters": [
+      "a (array) – 1-D or 2-D input array.",
+      "k (int, optional) – The diagonal to extract or construct. Default: 0."
+    ],
+    "returns": "The extracted diagonal or the constructed diagonal matrix.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.divide",
+    "signature": "divide(a: scalar | array, b: scalar | array, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise division. Divide two arrays with numpy-style broadcasting semantics. Either or both input arrays can also be scalars.",
+    "parameters": [
+      "a (array) – Input array or scalar.",
+      "b (array) – Input array or scalar."
+    ],
+    "returns": "The quotient a / b.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.divmod",
+    "signature": "divmod(a: scalar | array, b: scalar | array, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise quotient and remainder. The fuction divmod(a, b) is equivalent to but faster than (a // b, a % b). The function uses numpy-style broadcasting semantics. Either or both input arrays can also be scalars.",
+    "parameters": [
+      "a (array) – Input array or scalar.",
+      "b (array) – Input array or scalar."
+    ],
+    "returns": "The quotient a // b and remainder a % b.",
+    "return_type": "tuple(array, array)"
+  },
+  {
+    "name": "mlx.core.equal",
+    "signature": "equal(a: scalar | array, b: scalar | array, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise equality. Equality comparison on two arrays with numpy-style broadcasting semantics. Either or both input arrays can also be scalars.",
+    "parameters": [
+      "a (array) – Input array or scalar.",
+      "b (array) – Input array or scalar."
+    ],
+    "returns": "The element-wise comparison a == b.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.erf",
+    "signature": "erf(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise error function.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The error function of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.erfinv",
+    "signature": "erfinv(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise inverse of erf().",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The inverse error function of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.exp",
+    "signature": "exp(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise exponential.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The exponential of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.expand_dims",
+    "signature": "expand_dims(a: array, /, axis: int | Sequence[int], *, stream: None | Stream | Device = None) → array",
+    "description": "Add a size one dimension at the given axis.",
+    "parameters": [
+      "a (array) – Input array.",
+      "axes (int or tuple(int)) – The index of the inserted dimensions."
+    ],
+    "returns": "The array with inserted dimensions.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.eye",
+    "signature": "eye(n: int, m: int | None = None, k: int = 0, dtype: Dtype | None = float32, *, stream: None | Stream | Device = None) → array",
+    "description": "Create an identity matrix or a general diagonal matrix.",
+    "parameters": [
+      "n (int) – The number of rows in the output.",
+      "m (int, optional) – The number of columns in the output. Defaults to n.",
+      "k (int, optional) – Index of the diagonal. Defaults to 0 (main diagonal).",
+      "dtype (Dtype, optional) – Data type of the output array. Defaults to float32.",
+      "stream (Stream, optional) – Stream or device. Defaults to None."
+    ],
+    "returns": "An array where all elements are equal to zero, except for the k-th diagonal, whose values are equal to one.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.flatten",
+    "signature": "flatten(a: array, /, start_axis: int = 0, end_axis: int = -1, *, stream: None | Stream | Device = None) → array",
+    "description": "Flatten an array. The axes flattened will be between start_axis and end_axis, inclusive. Negative axes are supported. After converting negative axis to positive, axes outside the valid range will be clamped to a valid value, start_axis to 0 and end_axis to ndim - 1.",
+    "parameters": [
+      "a (array) – Input array.",
+      "start_axis (int, optional) – The first dimension to flatten. Defaults to 0.",
+      "end_axis (int, optional) – The last dimension to flatten. Defaults to -1.",
+      "stream (Stream, optional) – Stream or device. Defaults to None in which case the default stream of the default device is used."
+    ],
+    "returns": "The flattened array.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.floor",
+    "signature": "floor(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise floor.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The floor of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.floor_divide",
+    "signature": "floor_divide(a: scalar | array, b: scalar | array, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise integer division. If either array is a floating point type then it is equivalent to calling floor() after divide().",
+    "parameters": [
+      "a (array) – Input array or scalar.",
+      "b (array) – Input array or scalar."
+    ],
+    "returns": "The quotient a // b.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.full",
+    "signature": "full(shape: int | Sequence[int], vals: scalar | array, dtype: Dtype | None = None, *, stream: None | Stream | Device = None) → array",
+    "description": "Construct an array with the given value. Constructs an array of size shape filled with vals. If vals is an array it must be broadcastable to the given shape.",
+    "parameters": [
+      "shape (int or list(int)) – The shape of the output array.",
+      "vals (float or int or array) – Values to fill the array with.",
+      "dtype (Dtype, optional) – Data type of the output array. If unspecified the output type is inferred from vals."
+    ],
+    "returns": "The output array with the specified shape and values.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.greater",
+    "signature": "greater(a: scalar | array, b: scalar | array, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise greater than. Strict greater than on two arrays with numpy-style broadcasting semantics. Either or both input arrays can also be scalars.",
+    "parameters": [
+      "a (array) – Input array or scalar.",
+      "b (array) – Input array or scalar."
+    ],
+    "returns": "The element-wise comparison a > b.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.greater_equal",
+    "signature": "greater_equal(a: scalar | array, b: scalar | array, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise greater or equal. Greater than or equal on two arrays with numpy-style broadcasting semantics. Either or both input arrays can also be scalars.",
+    "parameters": [
+      "a (array) – Input array or scalar.",
+      "b (array) – Input array or scalar."
+    ],
+    "returns": "The element-wise comparison a >= b.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.identity",
+    "signature": "identity(n: int, dtype: Dtype | None = float32, *, stream: None | Stream | Device = None) → array",
+    "description": "Create a square identity matrix.",
+    "parameters": [
+      "n (int) – The number of rows and columns in the output.",
+      "dtype (Dtype, optional) – Data type of the output array. Defaults to float32.",
+      "stream (Stream, optional) – Stream or device. Defaults to None."
+    ],
+    "returns": "An identity matrix of size n x n.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.inner",
+    "signature": "inner(a: array, b: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Ordinary inner product of vectors for 1-D arrays, in higher dimensions a sum product over the last axes.",
+    "parameters": [
+      "a (array) – Input array",
+      "b (array) – Input array"
+    ],
+    "returns": "The inner product.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.isclose",
+    "signature": "isclose(a: array, b: array, /, rtol: float = 1e-05, atol: float = 1e-08, *, equal_nan: bool = False, stream: None | Stream | Device = None) → array",
+    "description": "Returns a boolean array where two arrays are element-wise equal within a tolerance. Infinite values are considered equal if they have the same sign, NaN values are not equal unless equal_nan is True.",
+    "parameters": [
+      "a (array) – Input array.",
+      "b (array) – Input array.",
+      "rtol (float) – Relative tolerance.",
+      "atol (float) – Absolute tolerance.",
+      "equal_nan (bool) – If True, NaNs are considered equal. Defaults to False."
+    ],
+    "returns": "The boolean output scalar indicating if the arrays are close.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.isnan",
+    "signature": "isnan(a: array, stream: None | Stream | Device = None) → array",
+    "description": "Return a boolean array indicating which elements are NaN.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The boolean array indicating which elements are NaN.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.isposinf",
+    "signature": "isposinf(a: array, stream: None | Stream | Device = None) → array",
+    "description": "Return a boolean array indicating which elements are positive infinity.",
+    "parameters": [
+      "a (array) – Input array.",
+      "stream (Union[None, Stream, Device]) – Optional stream or device."
+    ],
+    "returns": "The boolean array indicating which elements are positive infinity.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.isneginf",
+    "signature": "isneginf(a: array, stream: None | Stream | Device = None) → array",
+    "description": "Return a boolean array indicating which elements are negative infinity.",
+    "parameters": [
+      "a (array) – Input array.",
+      "stream (Union[None, Stream, Device]) – Optional stream or device."
+    ],
+    "returns": "The boolean array indicating which elements are negative infinity.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.isinf",
+    "signature": "isinf(a: array, stream: None | Stream | Device = None) → array",
+    "description": "Return a boolean array indicating which elements are +/- inifnity.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The boolean array indicating which elements are +/- infinity.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.less",
+    "signature": "less(a: scalar | array, b: scalar | array, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise less than. Strict less than on two arrays with numpy-style broadcasting semantics. Either or both input arrays can also be scalars.",
+    "parameters": [
+      "a (array) – Input array or scalar.",
+      "b (array) – Input array or scalar."
+    ],
+    "returns": "The element-wise comparison a < b.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.less_equal",
+    "signature": "less_equal(a: scalar | array, b: scalar | array, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise less than or equal. Less than or equal on two arrays with numpy-style broadcasting semantics. Either or both input arrays can also be scalars.",
+    "parameters": [
+      "a (array) – Input array or scalar.",
+      "b (array) – Input array or scalar."
+    ],
+    "returns": "The element-wise comparison a <= b.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.linspace",
+    "signature": "linspace(start, stop, num: int | None = 50, dtype: Dtype | None = float32, stream: None | Stream | Device = None) → array",
+    "description": "Generate num evenly spaced numbers over interval [start, stop].",
+    "parameters": [
+      "start (scalar) – Starting value.",
+      "stop (scalar) – Stopping value.",
+      "num (int, optional) – Number of samples, defaults to 50.",
+      "dtype (Dtype, optional) – Specifies the data type of the output, default to float32."
+    ],
+    "returns": "The range of values.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.log",
+    "signature": "log(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise natural logarithm.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The natural logarithm of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.log2",
+    "signature": "log2(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise base-2 logarithm.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The base-2 logarithm of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.log10",
+    "signature": "log10(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise base-10 logarithm.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The base-10 logarithm of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.log1p",
+    "signature": "log1p(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise natural log of one plus the array.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The natural logarithm of one plus a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.logaddexp",
+    "signature": "logaddexp(a: scalar | array, b: scalar | array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise log-add-exp. This is a numerically stable log-add-exp of two arrays with numpy-style broadcasting semantics. Either or both input arrays can also be scalars.",
+    "parameters": [
+      "a (array) – Input array or scalar.",
+      "b (array) – Input array or scalar."
+    ],
+    "returns": "The log-add-exp of a and b.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.logical_not",
+    "signature": "logical_not(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise logical not.",
+    "parameters": [
+      "a (array) – Input array or scalar."
+    ],
+    "returns": "The boolean array containing the logical not of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.logical_and",
+    "signature": "logical_and(a: array, b: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise logical and.",
+    "parameters": [
+      "a (array) – First input array or scalar.",
+      "b (array) – Second input array or scalar."
+    ],
+    "returns": "The boolean array containing the logical and of a and b.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.logical_or",
+    "signature": "logical_or(a: array, b: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise logical or.",
+    "parameters": [
+      "a (array) – First input array or scalar.",
+      "b (array) – Second input array or scalar."
+    ],
+    "returns": "The boolean array containing the logical or of a and b.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.logsumexp",
+    "signature": "logsumexp(a: array, /, axis: None | int | Sequence[int] = None, keepdims: bool = False, *, stream: None | Stream | Device = None) → array",
+    "description": "A log-sum-exp reduction over the given axes. The log-sum-exp reduction is a numerically stable version of:",
+    "parameters": [
+      "a (array) – Input array.",
+      "axis (int or list(int), optional) – Optional axis or axes to reduce over. If unspecified this defaults to reducing over the entire array.",
+      "keepdims (bool, optional) – Keep reduced axes as singleton dimensions, defaults to False."
+    ],
+    "returns": "The output array with the corresponding axes reduced.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.matmul",
+    "signature": "matmul(a: array, b: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Matrix multiplication. Perform the (possibly batched) matrix multiplication of two arrays. This function supports broadcasting for arrays with more than two dimensions.",
+    "parameters": [
+      "a (array) – Input array or scalar.",
+      "b (array) – Input array or scalar."
+    ],
+    "returns": "The matrix product of a and b.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.max",
+    "signature": "max(a: array, /, axis: None | int | Sequence[int] = None, keepdims: bool = False, *, stream: None | Stream | Device = None) → array",
+    "description": "A max reduction over the given axes.",
+    "parameters": [
+      "a (array) – Input array.",
+      "axis (int or list(int), optional) – Optional axis or axes to reduce over. If unspecified this defaults to reducing over the entire array.",
+      "keepdims (bool, optional) – Keep reduced axes as singleton dimensions, defaults to False."
+    ],
+    "returns": "The output array with the corresponding axes reduced.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.maximum",
+    "signature": "maximum(a: scalar | array, b: scalar | array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise maximum. Take the element-wise max of two arrays with numpy-style broadcasting semantics. Either or both input arrays can also be scalars.",
+    "parameters": [
+      "a (array) – Input array or scalar.",
+      "b (array) – Input array or scalar."
+    ],
+    "returns": "The max of a and b.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.mean",
+    "signature": "mean(a: array, /, axis: None | int | Sequence[int] = None, keepdims: bool = False, *, stream: None | Stream | Device = None) → array",
+    "description": "Compute the mean(s) over the given axes.",
+    "parameters": [
+      "a (array) – Input array.",
+      "axis (int or list(int), optional) – Optional axis or axes to reduce over. If unspecified this defaults to reducing over the entire array.",
+      "keepdims (bool, optional) – Keep reduced axes as singleton dimensions, defaults to False."
+    ],
+    "returns": "The output array of means.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.min",
+    "signature": "min(a: array, /, axis: None | int | Sequence[int] = None, keepdims: bool = False, *, stream: None | Stream | Device = None) → array",
+    "description": "A min reduction over the given axes.",
+    "parameters": [
+      "a (array) – Input array.",
+      "axis (int or list(int), optional) – Optional axis or axes to reduce over. If unspecified this defaults to reducing over the entire array.",
+      "keepdims (bool, optional) – Keep reduced axes as singleton dimensions, defaults to False."
+    ],
+    "returns": "The output array with the corresponding axes reduced.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.minimum",
+    "signature": "minimum(a: scalar | array, b: scalar | array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise minimum. Take the element-wise min of two arrays with numpy-style broadcasting semantics. Either or both input arrays can also be scalars.",
+    "parameters": [
+      "a (array) – Input array or scalar.",
+      "b (array) – Input array or scalar."
+    ],
+    "returns": "The min of a and b.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.multiply",
+    "signature": "multiply(a: scalar | array, b: scalar | array, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise multiplication. Multiply two arrays with numpy-style broadcasting semantics. Either or both input arrays can also be scalars.",
+    "parameters": [
+      "a (array) – Input array or scalar.",
+      "b (array) – Input array or scalar."
+    ],
+    "returns": "The multiplication a * b.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.negative",
+    "signature": "negative(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise negation.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The negative of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.ones",
+    "signature": "ones(shape: int | Sequence[int], dtype: Dtype | None = float32, *, stream: None | Stream | Device = None) → array",
+    "description": "Construct an array of ones.",
+    "parameters": [
+      "shape (int or list(int)) – The shape of the output array.",
+      "dtype (Dtype, optional) – Data type of the output array. If unspecified the output type defaults to float32."
+    ],
+    "returns": "The array of ones with the specified shape.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.ones_like",
+    "signature": "ones_like(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "An array of ones like the input.",
+    "parameters": [
+      "a (array) – The input to take the shape and type from."
+    ],
+    "returns": "The output array filled with ones.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.outer",
+    "signature": "outer(a: array, b: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Compute the outer product of two 1-D arrays, if the array’s passed are not 1-D a flatten op will be run beforehand.",
+    "parameters": [
+      "a (array) – Input array",
+      "b (array) – Input array"
+    ],
+    "returns": "The outer product.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.pad",
+    "signature": "pad(a: array, pad_width: int | tuple[int] | tuple[int, int] | list[tuple[int, int]], mode: Literal['constant', 'edge'] = 'constant', constant_values: scalar | array = 0, *, stream: None | Stream | Device = None) → array",
+    "description": "Pad an array with a constant value",
+    "parameters": [
+      "a (array) – Input array.",
+      "pad_width (int, tuple(int), tuple(int, int) or list(tuple(int, int))) – Number of padded values to add to the edges of each axis:((before_1, after_1), (before_2, after_2), ..., (before_N, after_N)). If a single pair of integers is passed then (before_i, after_i) are all the same. If a single integer or tuple with a single integer is passed then all axes are extended by the same number on each side.",
+      "mode – Padding mode. One of the following strings: “constant” (default): Pads with a constant value. “edge”: Pads with the edge values of array.",
+      "constant_value (array or scalar, optional) – Optional constant value to pad the edges of the array with."
+    ],
+    "returns": "The padded array.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.prod",
+    "signature": "prod(a: array, /, axis: None | int | Sequence[int] = None, keepdims: bool = False, *, stream: None | Stream | Device = None) → array",
+    "description": "An product reduction over the given axes.",
+    "parameters": [
+      "a (array) – Input array.",
+      "axis (int or list(int), optional) – Optional axis or axes to reduce over. If unspecified this defaults to reducing over the entire array.",
+      "keepdims (bool, optional) – Keep reduced axes as singleton dimensions, defaults to False."
+    ],
+    "returns": "The output array with the corresponding axes reduced.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.reciprocal",
+    "signature": "reciprocal(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise reciprocal.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The reciprocal of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.repeat",
+    "signature": "repeat(array: array, repeats: int, axis: int | None = None, *, stream: None | Stream | Device = None) → array",
+    "description": "Repeat an array along a specified axis.",
+    "parameters": [
+      "array (array) – Input array.",
+      "repeats (int) – The number of repetitions for each element.",
+      "axis (int, optional) – The axis in which to repeat the array along. If unspecified it uses the flattened array of the input and repeats along axis 0.",
+      "stream (Stream, optional) – Stream or device. Defaults to None."
+    ],
+    "returns": "The resulting repeated array.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.reshape",
+    "signature": "reshape(a: array, /, shape: Sequence[int], *, stream: None | Stream | Device = None) → array",
+    "description": "Reshape an array while preserving the size.",
+    "parameters": [
+      "a (array) – Input array.",
+      "shape (tuple(int)) – New shape.",
+      "stream (Stream, optional) – Stream or device. Defaults to None in which case the default stream of the default device is used."
+    ],
+    "returns": "The reshaped array.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.round",
+    "signature": "round(a: array, /, decimals: int = 0, stream: None | Stream | Device = None) → array",
+    "description": "Round to the given number of decimals. Basically performs:",
+    "parameters": [
+      "a (array) – Input array",
+      "decimals (int) – Number of decimal places to round to. (default: 0)"
+    ],
+    "returns": "An array of the same type as a rounded to the given number of decimals.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.rsqrt",
+    "signature": "rsqrt(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise reciprocal and square root.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "One over the square root of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.sigmoid",
+    "signature": "sigmoid(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise logistic sigmoid. The logistic sigmoid function is:",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The logistic sigmoid of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.sign",
+    "signature": "sign(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise sign.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The sign of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.sin",
+    "signature": "sin(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise sine.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The sine of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.sinh",
+    "signature": "sinh(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise hyperbolic sine.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The hyperbolic sine of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.softmax",
+    "signature": "softmax(a: array, /, axis: None | int | Sequence[int] = None, *, stream: None | Stream | Device = None) → array",
+    "description": "Perform the softmax along the given axis. This operation is a numerically stable version of:",
+    "parameters": [
+      "a (array) – Input array.",
+      "axis (int or list(int), optional) – Optional axis or axes to compute the softmax over. If unspecified this performs the softmax over the full array."
+    ],
+    "returns": "The output of the softmax.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.sort",
+    "signature": "sort(a: array, /, axis: None | int = -1, *, stream: None | Stream | Device = None) → array",
+    "description": "Returns a sorted copy of the array.",
+    "parameters": [
+      "a (array) – Input array.",
+      "axis (int or None, optional) – Optional axis to sort over. If None, this sorts over the flattened array. If unspecified, it defaults to -1 (sorting over the last axis)."
+    ],
+    "returns": "The sorted array.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.split",
+    "signature": "split(a: array, /, indices_or_sections: int | Sequence[int], axis: int = 0, *, stream: None | Stream | Device = None) → array",
+    "description": "Split an array along a given axis.",
+    "parameters": [
+      "a (array) – Input array.",
+      "indices_or_sections (int or list(int)) – If indices_or_sections is an integer the array is split into that many sections of equal size. An error is raised if this is not possible. If indices_or_sections is a list, the list contains the indices of the start of each subarray along the given axis.",
+      "axis (int, optional) – Axis to split along, defaults to 0."
+    ],
+    "returns": "A list of split arrays.",
+    "return_type": "list(array)"
+  },
+  {
+    "name": "mlx.core.sqrt",
+    "signature": "sqrt(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise square root.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The square root of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.square",
+    "signature": "square(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise square.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The square of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.squeeze",
+    "signature": "squeeze(a: array, /, axis: None | int | Sequence[int] = None, *, stream: None | Stream | Device = None) → array",
+    "description": "Remove length one axes from an array.",
+    "parameters": [
+      "a (array) – Input array.",
+      "axis (int or tuple(int), optional) – Axes to remove. Defaults to None in which case all size one axes are removed."
+    ],
+    "returns": "The output array with size one axes removed.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.stack",
+    "signature": "stack(arrays: list[array], axis: int | None = 0, *, stream: None | Stream | Device = None) → array",
+    "description": "Stacks the arrays along a new axis.",
+    "parameters": [
+      "arrays (list(array)) – A list of arrays to stack.",
+      "axis (int, optional) – The axis in the result array along which the input arrays are stacked. Defaults to 0.",
+      "stream (Stream, optional) – Stream or device. Defaults to None."
+    ],
+    "returns": "The resulting stacked array.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.subtract",
+    "signature": "subtract(a: scalar | array, b: scalar | array, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise subtraction. Subtract one array from another with numpy-style broadcasting semantics. Either or both input arrays can also be scalars.",
+    "parameters": [
+      "a (array) – Input array or scalar.",
+      "b (array) – Input array or scalar."
+    ],
+    "returns": "The difference a - b.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.sum",
+    "signature": "sum(a: array, /, axis: None | int | Sequence[int] = None, keepdims: bool = False, *, stream: None | Stream | Device = None) → array",
+    "description": "Sum reduce the array over the given axes.",
+    "parameters": [
+      "a (array) – Input array.",
+      "axis (int or list(int), optional) – Optional axis or axes to reduce over. If unspecified this defaults to reducing over the entire array.",
+      "keepdims (bool, optional) – Keep reduced axes as singleton dimensions, defaults to False."
+    ],
+    "returns": "The output array with the corresponding axes reduced.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.swapaxes",
+    "signature": "swapaxes(a: array, /, axis1: int, axis2: int, *, stream: None | Stream | Device = None) → array",
+    "description": "Swap two axes of an array.",
+    "parameters": [
+      "a (array) – Input array.",
+      "axis1 (int) – Specifies the first axis.",
+      "axis2 (int) – Specifies the second axis."
+    ],
+    "returns": "The array with swapped axes.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.take",
+    "signature": "take(a: array, /, indices: int | array, axis: int | None = None, *, stream: None | Stream | Device = None) → array",
+    "description": "Take elements along an axis. The elements are taken from indices along the specified axis. If the axis is not specified the array is treated as a flattened 1-D array prior to performing the take.",
+    "parameters": [
+      "a (array) – Input array.",
+      "indices (int or array) – Integer index or input array with integral type.",
+      "axis (int, optional) – Axis along which to perform the take. If unspecified the array is treated as a flattened 1-D vector."
+    ],
+    "returns": "The indexed values of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.take_along_axis",
+    "signature": "take_along_axis(a: array, /, indices: array, axis: int | None = None, *, stream: None | Stream | Device = None) → array",
+    "description": "Take values along an axis at the specified indices.",
+    "parameters": [
+      "a (array) – Input array.",
+      "indices (array) – Indices array. These should be broadcastable with the input array excluding the axis dimension.",
+      "axis (int or None) – Axis in the input to take the values from. If axis == None the array is flattened to 1D prior to the indexing operation."
+    ],
+    "returns": "The output array.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.tan",
+    "signature": "tan(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise tangent.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The tangent of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.tanh",
+    "signature": "tanh(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Element-wise hyperbolic tangent.",
+    "parameters": [
+      "a (array) – Input array."
+    ],
+    "returns": "The hyperbolic tangent of a.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.tensordot",
+    "signature": "tensordot(a: array, b: array, /, axes: int | list[Sequence[int]] = 2, *, stream: None | Stream | Device = None) → array",
+    "description": "Compute the tensor dot product along the specified axes.",
+    "parameters": [
+      "a (array) – Input array",
+      "b (array) – Input array",
+      "axes (int or list(list(int)), optional) – The number of dimensions to sum over. If an integer is provided, then sum over the last axes dimensions of a and the first axes dimensions of b. If a list of lists is provided, then sum over the corresponding dimensions of a and b. Default: 2."
+    ],
+    "returns": "The tensor dot product.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.tile",
+    "signature": "tile(a: array, reps: int | Sequence[int], /, *, stream: None | Stream | Device = None) → array",
+    "description": "Construct an array by repeating a the number of times given by reps.",
+    "parameters": [
+      "a (array) – Input array",
+      "reps (int or list(int)) – The number of times to repeat a along each axis."
+    ],
+    "returns": "The tiled array.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.topk",
+    "signature": "topk(a: array, /, k: int, axis: None | int = -1, *, stream: None | Stream | Device = None) → array",
+    "description": "Returns the k largest elements from the input along a given axis. The elements will not necessarily be in sorted order.",
+    "parameters": [
+      "a (array) – Input array.",
+      "k (int) – k top elements to be returned",
+      "axis (int or None, optional) – Optional axis to select over. If None, this selects the top k elements over the flattened array. If unspecified, it defaults to -1."
+    ],
+    "returns": "The top k elements from the input.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.transpose",
+    "signature": "transpose(a: array, /, axes: Sequence[int] | None = None, *, stream: None | Stream | Device = None) → array",
+    "description": "Transpose the dimensions of the array.",
+    "parameters": [
+      "a (array) – Input array.",
+      "axes (list(int), optional) – Specifies the source axis for each axis in the new array. The default is to reverse the axes."
+    ],
+    "returns": "The transposed array.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.var",
+    "signature": "var(a: array, /, axis: None | int | Sequence[int] = None, keepdims: bool = False, ddof: int = 0, *, stream: None | Stream | Device = None) → array",
+    "description": "Compute the variance(s) over the given axes.",
+    "parameters": [
+      "a (array) – Input array.",
+      "axis (int or list(int), optional) – Optional axis or axes to reduce over. If unspecified this defaults to reducing over the entire array.",
+      "keepdims (bool, optional) – Keep reduced axes as singleton dimensions, defaults to False.",
+      "ddof (int, optional) – The divisor to compute the variance is N - ddof, defaults to 0."
+    ],
+    "returns": "The output array of variances.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.where",
+    "signature": "where(condition: scalar | array, x: scalar | array, y: scalar | array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "Select from x or y according to condition. The condition and input arrays must be the same shape or broadcastable with each another.",
+    "parameters": [
+      "condition (array) – The condition array.",
+      "x (array) – The input selected from where condition is True.",
+      "y (array) – The input selected from where condition is False."
+    ],
+    "returns": "The output containing elements selected from x and y.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.zeros",
+    "signature": "zeros(shape: int | Sequence[int], dtype: Dtype | None = float32, *, stream: None | Stream | Device = None) → array",
+    "description": "Construct an array of zeros.",
+    "parameters": [
+      "shape (int or list(int)) – The shape of the output array.",
+      "dtype (Dtype, optional) – Data type of the output array. If unspecified the output type defaults to float32."
+    ],
+    "returns": "The array of zeros with the specified shape.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.zeros_like",
+    "signature": "zeros_like(a: array, /, *, stream: None | Stream | Device = None) → array",
+    "description": "An array of zeros like the input.",
+    "parameters": [
+      "a (array) – The input to take the shape and type from."
+    ],
+    "returns": "The output array filled with zeros.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.random.bernoulli",
+    "signature": "bernoulli(p: scalar | array = 0.5, shape: Sequence[int] | None = None, key: array | None = None, stream: None | Stream | Device = None) → array",
+    "description": "Generate Bernoulli random values. The values are sampled from the bernoulli distribution with parameter p. The parameter p can be a float or array and must be broadcastable to shape.",
+    "parameters": [
+      "p (float or array, optional) – Parameter of the Bernoulli distribution. Default: 0.5.",
+      "shape (list(int), optional) – Shape of the output. Default: p.shape.",
+      "key (array, optional) – A PRNG key. Default: None."
+    ],
+    "returns": "The array of random integers.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.random.categorical",
+    "signature": "categorical(logits: array, axis: int = -1, shape: Sequence[int] | None = None, num_samples: int | None = None, key: array | None = None, stream: None | Stream | Device = None) → array",
+    "description": "Sample from a categorical distribution. The values are sampled from the categorical distribution specified by the unnormalized values in logits. Note, at most one of shape or num_samples can be specified. If both are None, the output has the same shape as logits with the axis dimension removed.",
+    "parameters": [
+      "logits (array) – The unnormalized categorical distribution(s).",
+      "axis (int, optional) – The axis which specifies the distribution. Default: -1.",
+      "shape (list(int), optional) – The shape of the output. This must be broadcast compatable with logits.shape with the axis dimension removed. Default: None",
+      "num_samples (int, optional) – The number of samples to draw from each of the categorical distributions in logits. The output will have num_samples in the last dimension. Default: None.",
+      "key (array, optional) – A PRNG key. Default: None."
+    ],
+    "returns": "The shape-sized output array with type uint32.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.random.gumbel",
+    "signature": "gumbel(shape: Sequence[int] = [], dtype: Dtype | None = float32, key: None | Stream | Device = None, stream: array | None = None) → array",
+    "description": "Sample from the standard Gumbel distribution. The values are sampled from a standard Gumbel distribution which CDF exp(-exp(-x)).",
+    "parameters": [
+      "shape (list(int)) – The shape of the output.",
+      "dtype (Dtype, optional) – The data type of the output. Default: float32.",
+      "key (array, optional) – A PRNG key. Default: None."
+    ],
+    "returns": "The array with shape shape and distributed according to the Gumbel distribution.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.random.normal",
+    "signature": "normal(shape: Sequence[int] = [], dtype: Dtype | None = float32, loc: float = 0.0, scale: float = 1.0, key: array | None = None, stream: None | Stream | Device = None) → array",
+    "description": "Generate normally distributed random numbers.",
+    "parameters": [
+      "shape (list(int), optional) – Shape of the output. Default is ().",
+      "dtype (Dtype, optional) – Type of the output. Default is float32.",
+      "loc (float, optional) – Mean of the distribution. Default is 0.0.",
+      "scale (float, optional) – Standard deviation of the distribution. Default is 1.0.",
+      "key (array, optional) – A PRNG key. Default: None."
+    ],
+    "returns": "The output array of random values.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.random.randint",
+    "signature": "randint(low: scalar | array, high: scalar | array, shape: Sequence[int] = [], dtype: Dtype | None = int32, key: array | None = None, stream: None | Stream | Device = None) → array",
+    "description": "Generate random integers from the given interval. The values are sampled with equal probability from the integers in half-open interval [low, high). The lower and upper bound can be scalars or arrays and must be broadcastable to shape.",
+    "parameters": [
+      "low (scalar or array) – Lower bound of the interval.",
+      "high (scalar or array) – Upper bound of the interval.",
+      "shape (list(int), optional) – Shape of the output. Default: ().",
+      "dtype (Dtype, optional) – Type of the output. Default: int32.",
+      "key (array, optional) – A PRNG key. Default: None."
+    ],
+    "returns": "The array of random integers.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.random.uniform",
+    "signature": "uniform(low: scalar | array = 0, high: scalar | array = 1, shape: Sequence[int] = [], dtype: Dtype | None = float32, key: array | None = None, stream: None | Stream | Device = None) → array",
+    "description": "Generate uniformly distributed random numbers. The values are sampled uniformly in the half-open interval [low, high). The lower and upper bound can be scalars or arrays and must be broadcastable to shape.",
+    "parameters": [
+      "low (scalar or array, optional) – Lower bound of the distribution. Default: 0.",
+      "high (scalar or array, optional) – Upper bound of the distribution. Default: 1.",
+      "shape (list(int), optional) – Shape of the output. Default:().",
+      "dtype (Dtype, optional) – Type of the output. Default: float32.",
+      "key (array, optional) – A PRNG key. Default: None."
+    ],
+    "returns": "The output array random values.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.fft.fft",
+    "signature": "fft(a: array, n: Optional[int] = None, axis: int = -1, stream: Optional[Union[Stream, Device]] = None) → array",
+    "description": "One dimensional discrete Fourier Transform.",
+    "parameters": [
+      "a (array) – The input array.",
+      "n (int, optional) – Size of the transformed axis. The corresponding axis in the input is truncated or padded with zeros to match n. The default value is a.shape[axis].",
+      "axis (int, optional) – Axis along which to perform the FFT. The default is -1."
+    ],
+    "returns": "The DFT of the input along the given axis.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.fft.ifft",
+    "signature": "ifft(a: array, n: Optional[int] = None, axis: int = -1, stream: Optional[Union[Stream, Device]] = None) → array",
+    "description": "One dimensional inverse discrete Fourier Transform.",
+    "parameters": [
+      "a (array) – The input array.",
+      "n (int, optional) – Size of the transformed axis. The corresponding axis in the input is truncated or padded with zeros to match n. The default value is a.shape[axis].",
+      "axis (int, optional) – Axis along which to perform the FFT. The default is -1."
+    ],
+    "returns": "The inverse DFT of the input along the given axis.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.fft.fft2",
+    "signature": "fft2(a: array, s: Optional[Sequence[int]] = None, axes: Optional[Sequence[int]] = [-2, -1], stream: Optional[Union[Stream, Device]] = None) → array",
+    "description": "Two dimensional discrete Fourier Transform.",
+    "parameters": [
+      "a (array) – The input array.",
+      "s (list(int), optional) – Sizes of the transformed axes. The corresponding axes in the input are truncated or padded with zeros to match the sizes in s. The default value is the sizes of a along axes.",
+      "axes (list(int), optional) – Axes along which to perform the FFT. The default is [-2, -1]."
+    ],
+    "returns": "The DFT of the input along the given axes.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.fft.ifft2",
+    "signature": "ifft2(a: array, s: Optional[Sequence[int]] = None, axes: Optional[Sequence[int]] = [-2, -1], stream: Optional[Union[Stream, Device]] = None) → array",
+    "description": "Two dimensional inverse discrete Fourier Transform.",
+    "parameters": [
+      "a (array) – The input array.",
+      "s (list(int), optional) – Sizes of the transformed axes. The corresponding axes in the input are truncated or padded with zeros to match the sizes in s. The default value is the sizes of a along axes.",
+      "axes (list(int), optional) – Axes along which to perform the FFT. The default is [-2, -1]."
+    ],
+    "returns": "The inverse DFT of the input along the given axes.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.fft.fftn",
+    "signature": "fftn(a: array, s: Optional[Sequence[int]] = None, axes: Optional[Sequence[int]] = None, stream: Optional[Union[Stream, Device]] = None) → array",
+    "description": "n-dimensional discrete Fourier Transform.",
+    "parameters": [
+      "a (array) – The input array.",
+      "s (list(int), optional) – Sizes of the transformed axes. The corresponding axes in the input are truncated or padded with zeros to match the sizes in s. The default value is the sizes of a along axes.",
+      "axes (list(int), optional) – Axes along which to perform the FFT. The default is None in which case the FFT is over the last len(s) axes are or all axes if s is also None."
+    ],
+    "returns": "The DFT of the input along the given axes.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.fft.ifftn",
+    "signature": "ifftn(a: array, s: Optional[Sequence[int]] = None, axes: Optional[Sequence[int]] = None, stream: Optional[Union[Stream, Device]] = None) → array",
+    "description": "n-dimensional inverse discrete Fourier Transform.",
+    "parameters": [
+      "a (array) – The input array.",
+      "s (list(int), optional) – Sizes of the transformed axes. The corresponding axes in the input are truncated or padded with zeros to match the sizes in s. The default value is the sizes of a along axes.",
+      "axes (list(int), optional) – Axes along which to perform the FFT. The default is None in which case the FFT is over the last len(s) axes or all axes if s is also None."
+    ],
+    "returns": "The inverse DFT of the input along the given axes.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.fft.rfft",
+    "signature": "rfft(a: array, n: Optional[int] = None, axis: int = -1, stream: Optional[Union[Stream, Device]] = None) → array",
+    "description": "One dimensional discrete Fourier Transform on a real input. The output has the same shape as the input except along axis in which case it has size n // 2 + 1.",
+    "parameters": [
+      "a (array) – The input array. If the array is complex it will be silently cast to a real type.",
+      "n (int, optional) – Size of the transformed axis. The corresponding axis in the input is truncated or padded with zeros to match n. The default value is a.shape[axis].",
+      "axis (int, optional) – Axis along which to perform the FFT. The default is -1."
+    ],
+    "returns": "The DFT of the input along the given axis. The output data type will be complex.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.fft.irfft",
+    "signature": "irfft(a: array, n: Optional[int] = None, axis: int = -1, stream: Optional[Union[Stream, Device]] = None) → array",
+    "description": "The inverse of rfft(). The output has the same shape as the input except along axis in which case it has size n.",
+    "parameters": [
+      "a (array) – The input array.",
+      "n (int, optional) – Size of the transformed axis. The corresponding axis in the input is truncated or padded with zeros to match n // 2 + 1. The default value is a.shape[axis] // 2 + 1.",
+      "axis (int, optional) – Axis along which to perform the FFT. The default is -1."
+    ],
+    "returns": "The real array containing the inverse of rfft().",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.fft.rfft2",
+    "signature": "rfft2(a: array, s: Optional[Sequence[int]] = None, axes: Optional[Sequence[int]] = [-2, -1], stream: Optional[Union[Stream, Device]] = None) → array",
+    "description": "Two dimensional real discrete Fourier Transform. The output has the same shape as the input except along the dimensions in axes in which case it has sizes from s. The last axis in axes is treated as the real axis and will have size s[-1] // 2 + 1.",
+    "parameters": [
+      "a (array) – The input array. If the array is complex it will be silently cast to a real type.",
+      "s (list(int), optional) – Sizes of the transformed axes. The corresponding axes in the input are truncated or padded with zeros to match the sizes in s. The default value is the sizes of a along axes.",
+      "axes (list(int), optional) – Axes along which to perform the FFT. The default is [-2, -1]."
+    ],
+    "returns": "The real DFT of the input along the given axes. The output data type will be complex.",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.fft.irfft2",
+    "signature": "irfft2(a: array, s: Optional[Sequence[int]] = None, axes: Optional[Sequence[int]] = [-2, -1], stream: Optional[Union[Stream, Device]] = None) → array",
+    "description": "The inverse of rfft2(). Note the input is generally complex. The dimensions of the input specified in axes are padded or truncated to match the sizes from s. The last axis in axes is treated as the real axis and will have size s[-1] // 2 + 1.",
+    "parameters": [
+      "a (array) – The input array.",
+      "s (list(int), optional) – Sizes of the transformed axes. The corresponding axes in the input are truncated or padded with zeros to match the sizes in s except for the last axis which has size s[-1] // 2 + 1. The default value is the sizes of a along axes.",
+      "axes (list(int), optional) – Axes along which to perform the FFT. The default is [-2, -1]."
+    ],
+    "returns": "The real array containing the inverse of rfft2().",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.fft.rfftn",
+    "signature": "rfftn(a: array, s: Optional[Sequence[int]] = None, axes: Optional[Sequence[int]] = None, stream: Optional[Union[Stream, Device]] = None) → array",
+    "description": "n-dimensional real discrete Fourier Transform. The output has the same shape as the input except along the dimensions in axes in which case it has sizes from s. The last axis in axes is treated as the real axis and will have size s[-1] // 2 + 1.",
+    "parameters": [
+      "a (array) – The input array. If the array is complex it will be silently cast to a real type.",
+      "s (list(int), optional) – Sizes of the transformed axes. The corresponding axes in the input are truncated or padded with zeros to match the sizes in s. The default value is the sizes of a along axes.",
+      "axes (list(int), optional) – Axes along which to perform the FFT. The default is None in which case the FFT is over the last len(s) axes or all axes if s is also None."
+    ],
+    "returns": "The real DFT of the input along the given axes. The output",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.fft.irfftn",
+    "signature": "irfftn(a: array, s: Optional[Sequence[int]] = None, axes: Optional[Sequence[int]] = None, stream: Optional[Union[Stream, Device]] = None) → array",
+    "description": "The inverse of rfftn(). Note the input is generally complex. The dimensions of the input specified in axes are padded or truncated to match the sizes from s. The last axis in axes is treated as the real axis and will have size s[-1] // 2 + 1.",
+    "parameters": [
+      "a (array) – The input array.",
+      "s (list(int), optional) – Sizes of the transformed axes. The corresponding axes in the input are truncated or padded with zeros to match the sizes in s. The default value is the sizes of a along axes.",
+      "axes (list(int), optional) – Axes along which to perform the FFT. The default is None in which case the FFT is over the last len(s) axes or all axes if s is also None."
+    ],
+    "returns": "The real array containing the inverse of rfftn().",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.linalg.norm",
+    "signature": "norm(a: array, /, ord: None | int | float | str = None, axis: None | int | list[int] = None, keepdims: bool = False, *, stream: None | Stream | Device = None) → array",
+    "description": "Matrix or vector norm. This function computes vector or matrix norms depending on the value of the ord and axis parameters.",
+    "parameters": [
+      "a (array) – Input array. If axis is None, a must be 1-D or 2-D, unless ord is None. If both axis and ord are None, the 2-norm of a.flatten will be returned.",
+      "ord (int, float or str, optional) – Order of the norm (see table under Notes). If None, the 2-norm (or Frobenius norm for matrices) will be computed along the given axis. Default: None.",
+      "axis (int or list(int), optional) – If axis is an integer, it specifies the axis of a along which to compute the vector norms. If axis is a 2-tuple, it specifies the axes that hold 2-D matrices, and the matrix norms of these matrices are computed. If axis is None then either a vector norm (when a is 1-D) or a matrix norm (when a is 2-D) is returned. Default: None.",
+      "keepdims (bool, optional) – If True, the axes which are normed over are left in the result as dimensions with size one. Default False."
+    ],
+    "returns": "The output containing the norm(s).",
+    "return_type": "array"
+  },
+  {
+    "name": "mlx.core.linalg.qr",
+    "signature": "qr(a: array, *, stream: None | Stream | Device = None) → Tuple[array, array]",
+    "description": "The QR factorization of the input matrix. This function supports arrays with at least 2 dimensions. The matrices which are factorized are assumed to be in the last two dimensions of the input.",
+    "parameters": [
+      "a (array) – Input array.",
+      "stream (Stream, optional) – Stream or device. Defaults to None in which case the default stream of the default device is used."
+    ],
+    "returns": "Q and R matrices such that Q @ R = a.",
+    "return_type": "tuple(array, array)"
+  }
+]
