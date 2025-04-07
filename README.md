@@ -50,8 +50,8 @@ After obtaining the fine-tuned models, we use them to perform code conversion be
 
 You can follow `./3_gen_and_conversion/convert.ipynb` and `./3_gen_and_conversion/randomgen.ipynb` to perform conversion and generation with the fine-tuned CodeLlama respectively. Remember to change the "model_id" to the catalogue of your merged model.
 
-## Reproduce Figures in Paper
-You can access the statistic pics of bugs with openning the html in `/detected_bugs/statistics`. All the bugs FUTURE detected are in `/detected_bugs/reproduction`
+## Reproduce Bugs in Paper
+All the bugs FUTURE detected are in `/detected_bugs/reproduction`. You can access the statistic pics of bugs with openning the html in `/detected_bugs/statistics`.
 
 ## Citation
 Please cite our paper if you find it useful:
