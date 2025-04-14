@@ -56,10 +56,13 @@ All the bugs FUTURE detected are in `./detected_bugs/reproduction`. You can acce
 ## Citation
 Please cite our paper if you find it useful:
 ```
-@article{li2024seeds,
-  title={The Seeds of the FUTURE Sprout from History: Fuzzing for Unveiling Vulnerabilities in Prospective Deep-Learning Libraries},
-  author={Li, Zhiyuan and Wu, Jingzheng and Ling, Xiang and Luo, Tianyue and Rui, Zhiqing and Wu, Yanjun},
-  journal={arXiv preprint arXiv:2412.01317},
-  year={2024}
+@inproceedings{li2025future,
+  author = {Li, Zhiyuan and Wu, Jingzheng and Ling, Xiang and Luo, Tianyue and Rui, Zhiqing and Wu, Yanjun},
+  booktitle = {2025 IEEE/ACM 47th International Conference on Software Engineering (ICSE)},
+  title = {{The Seeds of the FUTURE Sprout from History: Fuzzing for Unveiling Vulnerabilities in Prospective Deep-Learning Libraries}},
+  year = {2025},
+  pages = {669-669},
+  publisher = {IEEE Computer Society},
+  address = {Los Alamitos, CA, USA}
 }
 ```
