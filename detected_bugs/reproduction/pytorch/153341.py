@@ -1,0 +1,11 @@
+import torch
+tensor1 = torch.tensor([float('nan')], dtype=torch.float32, device='cpu')
+scales = torch.tensor([1.0], dtype=torch.float32, device='cpu')
+zero_points = torch.tensor([0], dtype=torch.int32, device='cpu')
+result1 = torch.quantize_per_channel(input=tensor1,scales=scales,zero_points=zero_points,axis=0,dtype=torch.qint8)
+print(result1)
+tensor2 = torch.tensor([float('nan')], dtype=torch.float32, device='cuda')
+scales = torch.tensor([1.0], dtype=torch.float32, device='cuda')
+zero_points = torch.tensor([0], dtype=torch.int32, device='cuda')
+result2 = torch.quantize_per_channel(input=tensor2,scales=scales,zero_points=zero_points,axis=0,dtype=torch.qint8)
+print(result2)

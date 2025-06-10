@@ -1,5 +1,5 @@
 ﻿API,Version,Links,Label,symptoms of bugs,causes of bugs,bug numbers,total bugs,total documentation,CVE,,,,,,,,,,
-oneflow.full,v0.9.1,https://github.com/Oneflow-Inc/oneflow/issues/10446,bug,Crash,Missing Parameter Checking,1,83,4,CVE-2024-36737,,,,,,,,,,
+oneflow.full,v0.9.1,https://github.com/Oneflow-Inc/oneflow/issues/10446,bug,Crash,Missing Parameter Checking,1,85,4,CVE-2024-36737,,,,,,,,,,
 oneflow.max/min/Tensor.max/Tensor.min,v0.9.1,https://github.com/Oneflow-Inc/oneflow/issues/10448,bug,Inconsistencies(src libs/tar libs),Nans and Infs,4,,,,,,,,,,,,,
 oneflow.tensordot,v0.9.1,https://github.com/Oneflow-Inc/oneflow/issues/10449,bug,Crash,Missing Parameter Checking,1,,,CVE-2024-36732,,,,,,,,,,
 oneflow.var/Tensor.var,v0.9.1,https://github.com/Oneflow-Inc/oneflow/issues/10450,bug,Crash,Missing Parameter Checking,2,,,CVE-2024-36734,,,,,,,,,,
@@ -30,3 +30,4 @@ oneflow.tensordot,v0.9.1,https://github.com/Oneflow-Inc/oneflow/issues/10479,bug
 oneflow.dot/Tensor.dot,v0.9.1,https://github.com/Oneflow-Inc/oneflow/issues/10480,bug,Crash,Missing Parameter Checking,2,,,CVE-2024-36743,,,,,,,,,,
 oneflow.matmul/Tensor.matmul,v0.9.1,https://github.com/Oneflow-Inc/oneflow/issues/10481,bug,Crash,Logic Deficiency,2,,,,,,,,,,,,,
 oneflow.square,v0.9.1,https://github.com/Oneflow-Inc/oneflow/issues/10482,documentation,,,1,,,,,,,,,,,,,
+oneflow.quantile/Tensor.quantile,v0.9.1,https://github.com/Oneflow-Inc/oneflow/issues/10646,bug,Inconsistencies(CPU/GPU),Nans and Infs,2,,,,,,,,,,,,,
